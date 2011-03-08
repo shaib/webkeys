@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Keyboard Layout Editor - {{ name }}{% endblock %}
+
+{% block header %}
+{% include "style.css" %}
+<link rel="stylesheet" type="text/css" href="{{ static_root }}css/kb-style.css" />
+{% endblock %}
+
+{% block content %}
+ <h2>Keyboard Layout - {{ name }}</h2>
+ <div class="control">
+   Show reference: 
+   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="showref1">
+     level 1
+   </button>
+   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="showref2">
+     level 2 (Shift)
+   </button>
+   Show layout:
+   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show1">
+     level 1
+   </button>
+   <button dojoType="dijit.form.ToggleButton" cleared iconClass="dijitCheckBoxIcon" id="show2">
+     level 2 (Shift)
+   </button>
+   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show3">
+     level 3 (AltGr)
+   </button>
+   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show4">
+     level 4 (AltGr+Shift)
+   </button>
+    <form method="post" action="{% url set-layout-font name %}">{% csrf_token %}
+      {{ font_form.as_p }}
+    </form>
+ </div>
+ <div class="keyboard">
+ {% for row in key_rows %}
+    {% spaceless %}
+ 	<nobr class="kbrow">
+    {% for key in row %}
+ 	   {% if key.levels %}
+ 	   {% url edit-key name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
+ 	   <span class="kbbasekey kbkey" style="width: {{ key.style_width }};"><a href="{{ edit_url }}">
+ 	   {% for char,style in key.refs.items %}
+ 	      <span class="{{ style }}">{{ char|default:"" }}</span>
+ 	   {% endfor %}
+ 	   {% for level in key.levels1 %}
+ 	      <span class="kbkeylevel{{ forloop.counter }} {{ level.style }}">{{ level|default:""|safe }}</span>
+ 	   {% endfor %}
+ 	   </a>
+ 	   <div class="tooltip">
+ 	   {% for level in key.levels1 %}
+ 	      Level {{ forloop.counter }}: {{ level.hexa }} {{ level.name }}<br>
+ 	   {% endfor %}
+ 	   </div>
+ 	   </span>
+ 	   {% else %}
+ 	   <span class="kbbasekey kbfunckey" style="width: {{ key.style_width }};">
+ 	     <span></span>
+ 	     <span style="{{ key.special_style }}">{{ key.name|safe }}</span>
+ 	   </span>
+ 	   {% endif %}   
+    {% endfor %}
+ 	</nobr>
+    {% endspaceless %}
+ 	<br>
+ {% endfor %}
+ </div>
+ <form method="get" action="{% url gen-map name %}" dojoType="dijit.form.Form">
+  <div class="control">
+   <button dojoType="dijit.form.Button" type="submit" name="type" value="xkb">
+     Ggenerate xkb symbols file
+   </button>
+   <button dojoType="dijit.form.Button" type="submit" name="type" value="klc">
+     Ggenerate KLC file (for use with MSKLC for Windows)
+   </button>
+   <input type="checkbox" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored">
+     Use mirroring
+   </input>
+  </div>
+ </form>
+ 
+ <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
+ <script type="text/javascript">
+    dojo.require("dijit.form.Button");
+    dojo.require("dijit.form.Form");
+        
+    function changeRefVisible() {
+      var effect = this.checked ? dojo.fadeIn : dojo.fadeOut
+      function fade(item) { effect({node: item}).play() } 
+      dojo.query(this.target).forEach(fade)
+      
+      var ref1 = dijit.byId("showref1").checked
+      var ref2 = dijit.byId("showref2").checked
+      var ref1and2 = ref1 || ref2
+      if (this.checked==ref1and2) {
+	      dojo.query(".kbref1and2").forEach(fade)
+      }
+    }
+    function changeVisible() {
+      var effect = this.checked ? dojo.fadeIn : dojo.fadeOut
+      function fade(item) { effect({node: item}).play() } 
+      dojo.query(this.target).forEach(fade)
+    }
+    function installVisible(ctrlId, target) {
+        var ctrl = dijit.byId(ctrlId)
+        ctrl.set('target',target)
+    	dojo.connect(ctrl, "onChange", changeVisible)
+    }
+    
+    function showTooltip() {
+    	dojo.query('.tooltip',this).forEach("dojo.fadeIn({node: item}).play()")
+    }
+    function hideTooltip() {
+    	dojo.query('.tooltip',this).forEach("dojo.fadeOut({node: item}).play()")
+    }
+    function installTooltip(item) {
+    	dojo.connect(item,"onmouseover",showTooltip)
+    	dojo.connect(item,"onmouseout",hideTooltip)
+    }
+    dojo.addOnLoad(function() {
+        var ctrl = dijit.byId("showref1")
+        ctrl.set('target','.kbref1')
+    	dojo.connect(ctrl, "onChange", changeRefVisible)
+        ctrl = dijit.byId("showref2")
+        ctrl.set('target','.kbref2')
+    	dojo.connect(ctrl, "onChange", changeRefVisible)
+        installVisible("show1", ".kbkeylevel1")
+        installVisible("show2", ".kbkeylevel2")
+        installVisible("show3", ".kbkeylevel3")
+        installVisible("show4", ".kbkeylevel4")
+        dojo.query(".kbkey").forEach(installTooltip)
+    }) 
+ </script>
+{% endblock %}

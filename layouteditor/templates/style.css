@@ -1,0 +1,7 @@
+<style type="text/css">
+ .kbdecoration { font-weight: bold; color: red; }
+ .kbdecoration span { font-weight: normal; color: grey; }
+ .kbkey { font-family: {{ font|default:"ezra sil, arial, sans serif" }}; }
+ .kbdecoration { font-family: {{ font|default:"ezra sil, arial, sans serif" }}; }
+ .kbsymbols { color: blue; }
+</style>

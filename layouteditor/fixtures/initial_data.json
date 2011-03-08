@@ -1,0 +1,2142 @@
+[
+  {
+    "pk": 1, 
+    "model": "layouteditor.layout", 
+    "fields": {
+      "ref1": 1, 
+      "ref2": 2, 
+      "name": "qwerty_ref"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "layouteditor.layout", 
+    "fields": {
+      "ref1": 1, 
+      "ref2": 2, 
+      "name": "si1452"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "", 
+      "layout": 1, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "shift", 
+      "layout": 1, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "", 
+      "layout": 1, 
+      "level": 3
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "", 
+      "layout": 1, 
+      "level": 4
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "", 
+      "layout": 2, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "", 
+      "layout": 2, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "", 
+      "layout": 2, 
+      "level": 3
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "layouteditor.level", 
+    "fields": {
+      "modifiers": "", 
+      "layout": 2, 
+      "level": 4
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "`", 
+      "row": 0, 
+      "pos": 0, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "1", 
+      "row": 0, 
+      "pos": 1, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "2", 
+      "row": 0, 
+      "pos": 2, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "3", 
+      "row": 0, 
+      "pos": 3, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "4", 
+      "row": 0, 
+      "pos": 4, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "5", 
+      "row": 0, 
+      "pos": 5, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "6", 
+      "row": 0, 
+      "pos": 6, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "7", 
+      "row": 0, 
+      "pos": 7, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "8", 
+      "row": 0, 
+      "pos": 8, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "9", 
+      "row": 0, 
+      "pos": 9, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "0", 
+      "row": 0, 
+      "pos": 10, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "-", 
+      "row": 0, 
+      "pos": 11, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "=", 
+      "row": 0, 
+      "pos": 12, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Q", 
+      "row": 1, 
+      "pos": 1, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "W", 
+      "row": 1, 
+      "pos": 2, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "E", 
+      "row": 1, 
+      "pos": 3, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "R", 
+      "row": 1, 
+      "pos": 4, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "T", 
+      "row": 1, 
+      "pos": 5, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Y", 
+      "row": 1, 
+      "pos": 6, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "U", 
+      "row": 1, 
+      "pos": 7, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "I", 
+      "row": 1, 
+      "pos": 8, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "O", 
+      "row": 1, 
+      "pos": 9, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "P", 
+      "row": 1, 
+      "pos": 10, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "[", 
+      "row": 1, 
+      "pos": 11, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "]", 
+      "row": 1, 
+      "pos": 12, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\\", 
+      "row": 1, 
+      "pos": 13, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "A", 
+      "row": 2, 
+      "pos": 1, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "S", 
+      "row": 2, 
+      "pos": 2, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "D", 
+      "row": 2, 
+      "pos": 3, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "F", 
+      "row": 2, 
+      "pos": 4, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "G", 
+      "row": 2, 
+      "pos": 5, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "H", 
+      "row": 2, 
+      "pos": 6, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "J", 
+      "row": 2, 
+      "pos": 7, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "K", 
+      "row": 2, 
+      "pos": 8, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "L", 
+      "row": 2, 
+      "pos": 9, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ";", 
+      "row": 2, 
+      "pos": 10, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "'", 
+      "row": 2, 
+      "pos": 11, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Z", 
+      "row": 3, 
+      "pos": 1, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "X", 
+      "row": 3, 
+      "pos": 2, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "C", 
+      "row": 3, 
+      "pos": 3, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "V", 
+      "row": 3, 
+      "pos": 4, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "B", 
+      "row": 3, 
+      "pos": 5, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "N", 
+      "row": 3, 
+      "pos": 6, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "M", 
+      "row": 3, 
+      "pos": 7, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ",", 
+      "row": 3, 
+      "pos": 8, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ".", 
+      "row": 3, 
+      "pos": 9, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "/", 
+      "row": 3, 
+      "pos": 10, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": " ", 
+      "row": 4, 
+      "pos": 3, 
+      "level": 1
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "~", 
+      "row": 0, 
+      "pos": 0, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "!", 
+      "row": 0, 
+      "pos": 1, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "@", 
+      "row": 0, 
+      "pos": 2, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 52, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "#", 
+      "row": 0, 
+      "pos": 3, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 53, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "$", 
+      "row": 0, 
+      "pos": 4, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 54, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "%", 
+      "row": 0, 
+      "pos": 5, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 55, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "^", 
+      "row": 0, 
+      "pos": 6, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 56, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "&", 
+      "row": 0, 
+      "pos": 7, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "*", 
+      "row": 0, 
+      "pos": 8, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "(", 
+      "row": 0, 
+      "pos": 9, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ")", 
+      "row": 0, 
+      "pos": 10, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "_", 
+      "row": 0, 
+      "pos": 11, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "+", 
+      "row": 0, 
+      "pos": 12, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Q", 
+      "row": 1, 
+      "pos": 1, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 63, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "W", 
+      "row": 1, 
+      "pos": 2, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "E", 
+      "row": 1, 
+      "pos": 3, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 65, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "R", 
+      "row": 1, 
+      "pos": 4, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "T", 
+      "row": 1, 
+      "pos": 5, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 67, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Y", 
+      "row": 1, 
+      "pos": 6, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "U", 
+      "row": 1, 
+      "pos": 7, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "I", 
+      "row": 1, 
+      "pos": 8, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "O", 
+      "row": 1, 
+      "pos": 9, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 71, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "P", 
+      "row": 1, 
+      "pos": 10, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 72, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "{", 
+      "row": 1, 
+      "pos": 11, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "}", 
+      "row": 1, 
+      "pos": 12, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "|", 
+      "row": 1, 
+      "pos": 13, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "A", 
+      "row": 2, 
+      "pos": 1, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 76, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "S", 
+      "row": 2, 
+      "pos": 2, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 77, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "D", 
+      "row": 2, 
+      "pos": 3, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 78, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "F", 
+      "row": 2, 
+      "pos": 4, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 79, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "G", 
+      "row": 2, 
+      "pos": 5, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 80, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "H", 
+      "row": 2, 
+      "pos": 6, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 81, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "J", 
+      "row": 2, 
+      "pos": 7, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 82, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "K", 
+      "row": 2, 
+      "pos": 8, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 83, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "L", 
+      "row": 2, 
+      "pos": 9, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 84, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ":", 
+      "row": 2, 
+      "pos": 10, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 85, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\"", 
+      "row": 2, 
+      "pos": 11, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 86, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Z", 
+      "row": 3, 
+      "pos": 1, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 87, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "X", 
+      "row": 3, 
+      "pos": 2, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 88, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "C", 
+      "row": 3, 
+      "pos": 3, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 89, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "V", 
+      "row": 3, 
+      "pos": 4, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 90, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "B", 
+      "row": 3, 
+      "pos": 5, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 91, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "N", 
+      "row": 3, 
+      "pos": 6, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 92, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "M", 
+      "row": 3, 
+      "pos": 7, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 93, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "<", 
+      "row": 3, 
+      "pos": 8, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 94, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ">", 
+      "row": 3, 
+      "pos": 9, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 95, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "?", 
+      "row": 3, 
+      "pos": 10, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 96, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": " ", 
+      "row": 4, 
+      "pos": 3, 
+      "level": 2
+    }
+  }, 
+  {
+    "pk": 97, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ";", 
+      "row": 0, 
+      "pos": 0, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 98, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "1", 
+      "row": 0, 
+      "pos": 1, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 99, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "2", 
+      "row": 0, 
+      "pos": 2, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 100, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "3", 
+      "row": 0, 
+      "pos": 3, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 101, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "4", 
+      "row": 0, 
+      "pos": 4, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 102, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "5", 
+      "row": 0, 
+      "pos": 5, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 103, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "6", 
+      "row": 0, 
+      "pos": 6, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 104, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "7", 
+      "row": 0, 
+      "pos": 7, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 105, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "8", 
+      "row": 0, 
+      "pos": 8, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 106, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "9", 
+      "row": 0, 
+      "pos": 9, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 107, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "0", 
+      "row": 0, 
+      "pos": 10, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 108, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "-", 
+      "row": 0, 
+      "pos": 11, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 109, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "=", 
+      "row": 0, 
+      "pos": 12, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 110, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "/", 
+      "row": 1, 
+      "pos": 1, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 111, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "'", 
+      "row": 1, 
+      "pos": 2, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 112, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e7", 
+      "row": 1, 
+      "pos": 3, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 113, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e8", 
+      "row": 1, 
+      "pos": 4, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 114, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d0", 
+      "row": 1, 
+      "pos": 5, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 115, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d8", 
+      "row": 1, 
+      "pos": 6, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 116, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d5", 
+      "row": 1, 
+      "pos": 7, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 117, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05df", 
+      "row": 1, 
+      "pos": 8, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 118, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05dd", 
+      "row": 1, 
+      "pos": 9, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 119, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e4", 
+      "row": 1, 
+      "pos": 10, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 120, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "[", 
+      "row": 1, 
+      "pos": 11, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 121, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "]", 
+      "row": 1, 
+      "pos": 12, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 122, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\\", 
+      "row": 1, 
+      "pos": 13, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 123, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e9", 
+      "row": 2, 
+      "pos": 1, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 124, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d3", 
+      "row": 2, 
+      "pos": 2, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 125, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d2", 
+      "row": 2, 
+      "pos": 3, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 126, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05db", 
+      "row": 2, 
+      "pos": 4, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 127, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e2", 
+      "row": 2, 
+      "pos": 5, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 128, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d9", 
+      "row": 2, 
+      "pos": 6, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 129, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d7", 
+      "row": 2, 
+      "pos": 7, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 130, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05dc", 
+      "row": 2, 
+      "pos": 8, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 131, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05da", 
+      "row": 2, 
+      "pos": 9, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 132, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e3", 
+      "row": 2, 
+      "pos": 10, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 133, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ",", 
+      "row": 2, 
+      "pos": 11, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 134, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d6", 
+      "row": 3, 
+      "pos": 1, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 135, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e1", 
+      "row": 3, 
+      "pos": 2, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 136, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d1", 
+      "row": 3, 
+      "pos": 3, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 137, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05d4", 
+      "row": 3, 
+      "pos": 4, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 138, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e0", 
+      "row": 3, 
+      "pos": 5, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 139, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05de", 
+      "row": 3, 
+      "pos": 6, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 140, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e6", 
+      "row": 3, 
+      "pos": 7, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 141, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05ea", 
+      "row": 3, 
+      "pos": 8, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 142, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05e5", 
+      "row": 3, 
+      "pos": 9, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 143, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ".", 
+      "row": 3, 
+      "pos": 10, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 144, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": " ", 
+      "row": 4, 
+      "pos": 3, 
+      "level": 5
+    }
+  }, 
+  {
+    "pk": 145, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "~", 
+      "row": 0, 
+      "pos": 0, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 146, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "!", 
+      "row": 0, 
+      "pos": 1, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 147, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "@", 
+      "row": 0, 
+      "pos": 2, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 148, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "#", 
+      "row": 0, 
+      "pos": 3, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 149, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "$", 
+      "row": 0, 
+      "pos": 4, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 150, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "%", 
+      "row": 0, 
+      "pos": 5, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 151, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "^", 
+      "row": 0, 
+      "pos": 6, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 152, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "&", 
+      "row": 0, 
+      "pos": 7, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 153, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "*", 
+      "row": 0, 
+      "pos": 8, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 154, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "(", 
+      "row": 0, 
+      "pos": 9, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 155, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ")", 
+      "row": 0, 
+      "pos": 10, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 156, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "_", 
+      "row": 0, 
+      "pos": 11, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 157, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "+", 
+      "row": 0, 
+      "pos": 12, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 158, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Q", 
+      "row": 1, 
+      "pos": 1, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 159, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "W", 
+      "row": 1, 
+      "pos": 2, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 160, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "E", 
+      "row": 1, 
+      "pos": 3, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 161, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "R", 
+      "row": 1, 
+      "pos": 4, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 162, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "T", 
+      "row": 1, 
+      "pos": 5, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 163, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Y", 
+      "row": 1, 
+      "pos": 6, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 164, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "U", 
+      "row": 1, 
+      "pos": 7, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 165, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "I", 
+      "row": 1, 
+      "pos": 8, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 166, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "O", 
+      "row": 1, 
+      "pos": 9, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 167, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "P", 
+      "row": 1, 
+      "pos": 10, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 168, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "{", 
+      "row": 1, 
+      "pos": 11, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 169, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "}", 
+      "row": 1, 
+      "pos": 12, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 170, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "|", 
+      "row": 1, 
+      "pos": 13, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 171, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "A", 
+      "row": 2, 
+      "pos": 1, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 172, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "S", 
+      "row": 2, 
+      "pos": 2, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 173, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "D", 
+      "row": 2, 
+      "pos": 3, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 174, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "F", 
+      "row": 2, 
+      "pos": 4, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 175, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "G", 
+      "row": 2, 
+      "pos": 5, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 176, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "H", 
+      "row": 2, 
+      "pos": 6, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 177, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "J", 
+      "row": 2, 
+      "pos": 7, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 178, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "K", 
+      "row": 2, 
+      "pos": 8, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 179, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "L", 
+      "row": 2, 
+      "pos": 9, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 180, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ":", 
+      "row": 2, 
+      "pos": 10, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 181, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\"", 
+      "row": 2, 
+      "pos": 11, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 182, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "Z", 
+      "row": 3, 
+      "pos": 1, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 183, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "X", 
+      "row": 3, 
+      "pos": 2, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 184, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "C", 
+      "row": 3, 
+      "pos": 3, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 185, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "V", 
+      "row": 3, 
+      "pos": 4, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 186, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "B", 
+      "row": 3, 
+      "pos": 5, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 187, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "N", 
+      "row": 3, 
+      "pos": 6, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 188, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "M", 
+      "row": 3, 
+      "pos": 7, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 189, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "<", 
+      "row": 3, 
+      "pos": 8, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 190, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": ">", 
+      "row": 3, 
+      "pos": 9, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 191, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "?", 
+      "row": 3, 
+      "pos": 10, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 192, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": " ", 
+      "row": 4, 
+      "pos": 3, 
+      "level": 6
+    }
+  }, 
+  {
+    "pk": 193, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05c2", 
+      "row": 1, 
+      "pos": 1, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 194, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05c1", 
+      "row": 1, 
+      "pos": 2, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 195, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u20ac", 
+      "row": 0, 
+      "pos": 3, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 196, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u20aa", 
+      "row": 0, 
+      "pos": 4, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 197, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u200f", 
+      "row": 3, 
+      "pos": 8, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 198, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u200e", 
+      "row": 3, 
+      "pos": 9, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 199, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05b8", 
+      "row": 1, 
+      "pos": 3, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 200, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05be", 
+      "row": 0, 
+      "pos": 11, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 201, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05b9", 
+      "row": 1, 
+      "pos": 7, 
+      "level": 7
+    }
+  }, 
+  {
+    "pk": 202, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05c7", 
+      "row": 1, 
+      "pos": 3, 
+      "level": 8
+    }
+  }, 
+  {
+    "pk": 203, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u2013", 
+      "row": 0, 
+      "pos": 11, 
+      "level": 8
+    }
+  }, 
+  {
+    "pk": 204, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05ba", 
+      "row": 1, 
+      "pos": 7, 
+      "level": 8
+    }
+  }, 
+  {
+    "pk": 205, 
+    "model": "layouteditor.keybinding", 
+    "fields": {
+      "char": "\u05c6", 
+      "row": 3, 
+      "pos": 5, 
+      "level": 8
+    }
+  }
+]

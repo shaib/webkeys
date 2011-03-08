@@ -1,0 +1,37 @@
+<style type="text/css">
+ .keyboard :link {text-decoration: none; color: black;}
+ .keyboard :visited {text-decoration: none; color: black; }
+ .keyboard :active {text-decoration: none; color: black; }
+ /*.keyboard :active .tooltip { color: black; }*/
+ .kbrow { letter-spacing: 0; word-spacing: 0; }
+ .kbbasekey { 
+ 	position: relative; 
+ 	display: inline-block; 
+ 	height: 3.8em; 
+ 	margin: 0.1em;
+ 	/*padding: 0.15em;*/
+ 	border: ridge 0.3em;
+ 	-moz-border-radius: 0.4em;
+ 	border-radius: 0.4em;
+ }
+ .kbkey:hover { background-color: yellow; }
+ .kbkey > a > span { position: absolute; }
+ .kbfunckey { background-color: black; color: white; }
+ .kbfunckey > span { position: absolute; left: 0.3em; top: 0.3em; font-size: 130%;} 
+ .kbkeylevel1 { bottom: 0.1em; left: 1.6em;}
+ .kbkeylevel2 { bottom: 1.2em; left: 1.6em; opacity: 0; }
+ .kbkeylevel3 { bottom: 1.2em; left: 2.7em;}
+ .kbkeylevel4 { bottom: 2.3em; left: 2.7em;}
+ .kbref1 { bottom: 0.1em; left: 0.1em;}
+ .kbref2 { bottom: 1.2em; left: 0.1em;}
+ .kbref1and2 { bottom: 0.1em; left: 0.1em; font-size:110%; }
+ .kbkey .tooltip { position: fixed; bottom: 1ex; left: 60%; height: 12ex; }
+ .kbkey .tooltip { opacity: 0; }
+ .tooltip { 
+ 	border: 1px solid blue; 
+ 	background-color: yellow;
+ 	padding: 0.3em; 
+ 	border-radius: 0.4em; 
+ 	-moz-border-radius: 0.4em; 
+ } 
+</style>
