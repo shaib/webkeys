@@ -5,6 +5,7 @@
  .kbdecoration { font-family: {{ font|default:"ezra sil, arial, sans serif" }}; }
  .kbsymbols { color: blue; }
  .control { white-space: nowrap; }
+ .kbrow { letter-spacing: 0; word-spacing: 0; white-space: nowrap; }
  /* 
     It appears if these aren't defined in the same page, they carry
     less weight than the browser's internal stylesheet.
@@ -12,6 +13,6 @@
     than in a separate, static CSS file
 */
  .keyboard :link { text-decoration: none; color: black; }
- .keyboard :visited {text-decoration: none; color: black; }
- .keyboard :active {text-decoration: none; color: black; }
+ .keyboard :visited { text-decoration: none; color: black; }
+ .keyboard :active { text-decoration: none; color: black; }
 </style>
