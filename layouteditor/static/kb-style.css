@@ -1,9 +1,6 @@
 <style type="text/css">
- .keyboard :link {text-decoration: none; color: black;}
- .keyboard :visited {text-decoration: none; color: black; }
- .keyboard :active {text-decoration: none; color: black; }
- /*.keyboard :active .tooltip { color: black; }*/
- .kbrow { letter-spacing: 0; word-spacing: 0; }
+
+ .kbrow { letter-spacing: 0; word-spacing: 0; white-space: nowrap; }
  .kbbasekey { 
  	position: relative; 
  	display: inline-block; 

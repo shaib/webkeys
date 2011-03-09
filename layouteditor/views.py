@@ -7,7 +7,7 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.http import Http404
+from django.utils.html import escape as html_escape
 
 from models import KeyBinding, Layout, Level
 from forms import KeyForm, CloneForm, FontForm
@@ -152,7 +152,10 @@ def kb105():
     return [row0,row1,row2,row3,row4]
 
 def html(u):
-    return u.encode('ascii', 'xmlcharrefreplace')
+    if u==' ':
+        return NBSP
+    else:
+        return '&#x%04x;' % ord(u)
 
 def presentation(char,
                  ADD_BASE="<span>%s</span>%s"):    

@@ -37,7 +37,7 @@
  <div class="keyboard">
  {% for row in key_rows %}
     {% spaceless %}
- 	<nobr class="kbrow">
+ 	<span class="kbrow">
     {% for key in row %}
  	   {% if key.levels %}
  	   {% url edit-key name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
@@ -62,7 +62,7 @@
  	   </span>
  	   {% endif %}   
     {% endfor %}
- 	</nobr>
+ 	</span>
     {% endspaceless %}
  	<br>
  {% endfor %}
