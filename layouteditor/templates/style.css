@@ -1,11 +1,17 @@
 <style type="text/css">
  .kbdecoration { font-weight: bold; color: red; }
  .kbdecoration span { font-weight: normal; color: black; opacity: 0.25; }
- .kbkey { font-family: {{ font|default:"ezra sil, arial, sans serif" }}; }
+ .kbkey {
+ 	display: inline; 
+ 	font-family: {{ font|default:"ezra sil, arial, sans serif" }}; 
+ }
  .kbdecoration { font-family: {{ font|default:"ezra sil, arial, sans serif" }}; }
  .kbsymbols { color: blue; }
  .control { white-space: nowrap; }
- .kbrow { letter-spacing: 0; word-spacing: 0; white-space: nowrap; }
+ .kbrow {
+ 	display: inline; 
+ 	letter-spacing: 0; word-spacing: 0; white-space: nowrap; 
+ }
  /* 
     It appears if these aren't defined in the same page, they carry
     less weight than the browser's internal stylesheet.

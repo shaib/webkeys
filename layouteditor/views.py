@@ -158,7 +158,7 @@ def html(u):
         return '&#x%04x;' % ord(u)
 
 def presentation(char,
-                 ADD_BASE="<span>%s</span>%s"):    
+                 ADD_BASE="<span>%s</span>&rlm;%s"):    
     u = unicode(char) # just make sure
     if u in VISIBLE_FORMATTING:
         value = VISIBLE_FORMATTING[u]

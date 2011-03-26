@@ -37,11 +37,11 @@
  <div class="keyboard">
  {% for row in key_rows %}
     {% spaceless %}
- 	<span class="kbrow">
+ 	<div class="kbrow">
     {% for key in row %}
  	   {% if key.levels %}
  	   {% url edit-key name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
- 	   <span class="kbbasekey kbkey" style="width: {{ key.style_width }};"><a href="{{ edit_url }}">
+ 	   <div class="kbbasekey kbkey" style="width: {{ key.style_width }};"><a href="{{ edit_url }}">
  	   {% for char,style in key.refs.items %}
  	      <span class="{{ style }}">{{ char|default:"" }}</span>
  	   {% endfor %}
@@ -53,8 +53,8 @@
  	   {% for level in key.levels1 %}
  	      Level {{ forloop.counter }}: {{ level.hexa }} {{ level.name }}<br>
  	   {% endfor %}
- 	   </div>
- 	   </span>
+ 	   </div> <!-- tooltip -->
+ 	   </div> <!-- kbkey -->
  	   {% else %}
  	   <span class="kbbasekey kbfunckey" style="width: {{ key.style_width }};">
  	     <span></span>
@@ -62,7 +62,7 @@
  	   </span>
  	   {% endif %}   
     {% endfor %}
- 	</span>
+ 	</div> <!-- kbrow -->
     {% endspaceless %}
  	<br>
  {% endfor %}
