@@ -41,18 +41,18 @@
     {% for key in row %}
  	   {% if key.levels %}
  	   {% url edit-key name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
- 	   <div class="kbbasekey kbkey" style="width: {{ key.style_width }};"><a href="{{ edit_url }}">
+ 	   <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="window.location.href='{{ edit_url }}'">
  	   {% for char,style in key.refs.items %}
  	      <span class="{{ style }}">{{ char|default:"" }}</span>
  	   {% endfor %}
  	   {% for level in key.levels1 %}
  	      <span class="kbkeylevel{{ forloop.counter }} {{ level.style }}">{{ level|default:""|safe }}</span>
  	   {% endfor %}
- 	   </a>
  	   <div class="tooltip">
  	   {% for level in key.levels1 %}
  	      Level {{ forloop.counter }}: {{ level.hexa }} {{ level.name }}<br>
  	   {% endfor %}
+ 	      Click key to edit
  	   </div> <!-- tooltip -->
  	   </div> <!-- kbkey -->
  	   {% else %}

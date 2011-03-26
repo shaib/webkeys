@@ -7,12 +7,12 @@
  	height: 3.8em; 
  	margin: 0.1em;
  	/*padding: 0.15em;*/
- 	border: ridge 0.3em;
+ 	border: solid 0.3em grey;
  	-moz-border-radius: 0.4em;
  	border-radius: 0.4em;
  }
- .kbkey:hover { background-color: yellow; }
- .kbkey > a > span { position: absolute; }
+ .kbkey:hover { background-color: yellow; cursor: pointer; }
+ .kbkey > span { position: absolute; }
  .kbfunckey { background-color: black; color: white; }
  .kbfunckey > span { position: absolute; left: 0.3em; top: 0.3em; font-size: 130%;} 
  .kbkeylevel1 { bottom: 0.1em; left: 1.6em;}
