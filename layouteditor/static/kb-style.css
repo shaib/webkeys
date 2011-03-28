@@ -22,7 +22,7 @@
  .kbref1 { bottom: 0.1em; left: 0.1em;}
  .kbref2 { bottom: 1.2em; left: 0.1em;}
  .kbref1and2 { bottom: 0.1em; left: 0.1em; font-size:110%; }
- .kbkey .tooltip { position: fixed; bottom: 1ex; left: 60%; height: 12ex; }
+ .kbkey .tooltip { position: fixed; bottom: 1ex; left: 60%; height: 15ex; }
  .kbkey .tooltip { opacity: 0; }
  .tooltip { 
  	border: 1px solid blue; 
