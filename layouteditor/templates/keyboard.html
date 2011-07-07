@@ -69,21 +69,29 @@
  </div>
  <form method="get" action="{% url gen-map name %}" dojoType="dijit.form.Form">
   <div class="control">
-   <button dojoType="dijit.form.Button" type="submit" name="type" value="xkb">
-     Ggenerate xkb symbols file
-   </button>
-   <button dojoType="dijit.form.Button" type="submit" name="type" value="klc">
-     Ggenerate KLC file (for use with MSKLC for Windows)
-   </button>
-   <input type="checkbox" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored">
+    Type of file to generate:
+  	<div name="type" value="xkb" dojoType="dijit.form.Select">
+	    <span value="xkb">xkb symbols file</span>
+    	<span value="klc">KLC file</span>
+	</div>
+	Caps lock behavior:
+  	<div name="caps_option" value="" dojoType="dijit.form.Select">
+  	{% for opt,desc in caps_choices %}
+	    <span value="{{ opt }}">{{ desc }}</span>
+	{% endfor %}
+	</div>
+     
+   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored">
      Use mirroring
-   </input>
+   </button>
+   <button dojoType="dijit.form.Button" type="submit">Generate layout file</button>
   </div>
  </form>
  
  <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js" djConfig="parseOnLoad: true" type="text/javascript"></script>
  <script type="text/javascript">
     dojo.require("dijit.form.Button");
+    dojo.require("dijit.form.Select");
     dojo.require("dijit.form.Form");
         
     function changeRefVisible() {

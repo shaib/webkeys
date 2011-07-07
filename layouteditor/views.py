@@ -7,11 +7,12 @@ from django.http import Http404, HttpResponseBadRequest
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.utils.html import escape as html_escape
+#from django.utils.html import escape as html_escape
 
 from models import KeyBinding, Layout, Level
 from forms import KeyForm, CloneForm, FontForm
 import keymaps as km
+import caps_options as caps
 
 __all__ = ["show_layout",
            "set_layout_font", "edit_key",
@@ -213,6 +214,7 @@ def show_layout(request, name='si1452'):
     return render_to_response("keyboard.html", 
                               {'key_rows':kb, 'name':name, 
                                'font': layout.font, 'font_form':font_form,
+                               'caps_choices': caps.choices(),
                                'static_root': settings.MEDIA_URL},
                               context_instance=RequestContext(request))
 
@@ -220,10 +222,12 @@ def gen_xkb(request, name):
     _, kb = make_view_keys(name)
     group_name = request.GET.get('group_name', name)
     mirrored = request.GET.get('mirrored', False)
+    caps_func = caps.get(request.GET.get('caps_option', None))
     kb = [[k for k in row if isinstance(k, Key)] for row in kb]
     for row in kb:        
         for key in row:
             key.mirrored = mirrored
+            key.caps_keys = caps_func(key)
             
     response = render_to_response("xkb_symbols", {
                                     'key_rows':kb, 
@@ -243,12 +247,14 @@ def gen_klc(request, name):
     for n in ("localename","localeid","languagename"):
         params[n] = request.GET.get(n, None)
     mirrored = request.GET.get('mirrored', False)
+    caps_func = caps.get(request.GET.get('caps_option', None))
     params['mirrored'] = mirrored
     for row,row_keys in enumerate(kb):        
         for pos,key in enumerate(row_keys):
             if not isinstance(key, Key):
                 continue
             key.mirrored = mirrored
+            key.caps_keys = caps_func(key)
             key.klc_annotate(row, pos)
     kb = [[k for k in r if isinstance(k, Key)] for r in kb]
     params.update(dict(name=name,
