@@ -44,8 +44,23 @@ __all__ = ['get', 'choices']
 #
 # Each function is presented by name (parameter to caps_lock decorator)
 # and description (first line of doc)
+import unicodedata as U
 
 @caps_option("Default")
 def default(key):
     "Caps lock behavior not specified by mapping"
     return None
+
+@caps_option("Latin")
+def latin(key):
+    "Turn the keyboard to latin (US) in first two levels"
+    return key.ref1.lower(), key.ref2.upper()
+
+@caps_option("Capitals")
+def capitals(key):
+    "Make latin letter keys produce capitals, others unshifted US; with shift, Hebrew letters and otherwise shifted Hebrew."
+    unshifted = key.ref1.upper()
+    is_hebrew_letter = U.name(key.levels[1].char).startswith('HEBREW LETTER')
+    is_shifted_latin = key.levels[2].char.isalpha()
+    shifted = key.levels[1].char if (is_hebrew_letter or is_shifted_latin) else key.levels[2].char
+    return unshifted, shifted
