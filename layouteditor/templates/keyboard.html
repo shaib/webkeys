@@ -69,22 +69,30 @@
  </div>
  <form method="get" action="{% url gen-map name %}" dojoType="dijit.form.Form">
   <div class="control">
-    Type of file to generate:
-  	<div name="type" value="xkb" dojoType="dijit.form.Select">
+    <table>
+    <tr>
+    <td>Type of file to generate:</td>
+  	<td><div name="type" value="xkb" dojoType="dijit.form.Select">
 	    <span value="xkb">xkb symbols file</span>
     	<span value="klc">KLC file</span>
-	</div>
-	Caps lock behavior:
-  	<div name="caps_option" value="" dojoType="dijit.form.Select">
+	</div></td>
+	</tr><tr>
+	<td>Caps lock behavior:</td>
+  	<td><div name="caps_option" value="" dojoType="dijit.form.Select">
   	{% for opt,desc in caps_choices %}
 	    <span value="{{ opt }}">{{ desc }}</span>
 	{% endfor %}
-	</div>
-     
-   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored">
-     Use mirroring
-   </button>
+	</div></td>
+	</tr><tr>
+    <td colspan="2">
+	<button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored">
+	  Use mirroring
+	</button>
+	</td>
+	</tr><tr><td colspan="2">
    <button dojoType="dijit.form.Button" type="submit">Generate layout file</button>
+   	</td></tr>
+   	</table>
   </div>
  </form>
  
