@@ -97,19 +97,17 @@ KLC_VK_NAMES = {
     ' ': 'SPACE'
 }
 
-KLC_CAP_1 = "EBM"
-
-def klc_vk_cap(qwerty_char):
+def klc_vk(qwerty_char):
     if qwerty_char.isalnum():
         vk = qwerty_char
     else:
         vk = KLC_VK_NAMES[qwerty_char]
     if len(vk)<8: vk += "\t"
-    if qwerty_char.isalpha() or qwerty_char==' ':
-        cap = int(qwerty_char in KLC_CAP_1)
-    else:
-        cap = 'SGCap'
-    return vk, cap
+    return vk
 
+def klc_cap(has_caps):
+    return 'SGCap' if has_caps else '0'
+    
+    
 def klc_special(qwerty_char):
     return klc(qwerty_char, False), klc_comment(qwerty_char, False)

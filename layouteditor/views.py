@@ -130,16 +130,21 @@ class Key(BaseKey):
     def klc_comments(self):
         levels = (u.char if u else u for u in self.levels1)
         return [km.klc_comment(u, self.mirrored) for u in levels]
+
+    def klc_caps_chars(self):
+        return [km.klc(u, self.mirrored) for u in self.caps_keys]
+    
+    def klc_caps_comments(self):
+        return [km.klc_comment(u, self.mirrored) for u in self.caps_keys]
     
     def klc_annotate(self, row, pos):
         self.sc = km.klc_sc(row, pos)
-        self.vk, self.cap = km.klc_vk_cap(self.ref1)
+        self.vk = km.klc_vk(self.ref1)        
+        self.cap = km.klc_cap(bool(self.caps_keys))
         levels = self.levels
         if len(levels)<5:
             levels[len(levels):5]=(5-len(levels))*[None]
         levels[3:3] = [None]
-        if self.cap=='SGCap':
-            self.klc_special, self.klc_special_comment = km.klc_special(self.ref1)
 
     
 def kb105():
