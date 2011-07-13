@@ -116,11 +116,16 @@ class Key(BaseKey):
         return value
     
     def xkb_chars(self):
-        levels = (u.char if u else u for u in self.levels1)
+        levels = [u.char if u else u for u in self.levels1]
+        if self.caps_keys:
+            levels.extend([None]*(4-len(levels)))
+            levels += self.caps_keys
         return [km.xkb(u, self.mirrored) for u in levels]
 
     def xkb_comments(self):
-        levels = (u.char if u else u for u in self.levels1)
+        levels = [u.char if u else u for u in self.levels1]
+        if self.caps_keys:
+            levels += self.caps_keys
         return filter(None, [km.xkb_comment(u, self.mirrored) for u in levels])
 
     def klc_chars(self):
@@ -145,6 +150,13 @@ class Key(BaseKey):
         if len(levels)<5:
             levels[len(levels):5]=(5-len(levels))*[None]
         levels[3:3] = [None]
+        
+    @property
+    def level_chars(self):
+        "For use in caps options. Returns the chars of the levels, with level 1 at index 1"
+        # Note: the above similar lines use self.levels1, where level 1 is at index 0.
+        return [u.char if u else u for u in self.levels]
+    
 
     
 def kb105():

@@ -60,7 +60,7 @@ def latin(key):
 def capitals(key):
     "Make latin letter keys produce capitals, others unshifted US; with shift, Hebrew letters and otherwise shifted Hebrew."
     unshifted = key.ref1.upper()
-    is_hebrew_letter = U.name(key.levels[1].char).startswith('HEBREW LETTER')
-    is_shifted_latin = key.levels[2].char.isalpha()
-    shifted = key.levels[1].char if (is_hebrew_letter or is_shifted_latin) else key.levels[2].char
+    is_hebrew_letter = U.name(key.level_chars[1]).startswith('HEBREW LETTER')
+    is_shifted_latin = key.level_chars[2].isalpha()
+    shifted = key.level_chars[1] if (is_hebrew_letter or is_shifted_latin) else key.level_chars[2]
     return unshifted, shifted
