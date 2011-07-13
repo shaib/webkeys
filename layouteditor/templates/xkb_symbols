@@ -2,36 +2,6 @@
 // TODO: Add some explanations of what this layout is for
 {{ mirror_comment }}
 
-// Define the 6-level type we sometimes use. 
-// Note this is not the right place to do such things; this file
-// can be used for personal testing of the keyboard layout, but
-// do not try to ship it this way for general use.
-partial default xkb_types "default" {
-
-	virtual_modifiers LevelThree;
-
-	type "SIX_LEVEL" {
-		modifiers = Shift+Lock+LevelThree;
-	
-		map[None]             = Level1;
-		map[Shift]            = Level2;	
-		map[LevelThree]       = Level3;
-		map[Shift+LevelThree] = Level4;
-		map[Lock]                  = Level5;
-		map[Lock+Shift]            = Level6;
-		map[Lock+LevelThree]       = Level3;
-		map[Lock+Shift+LevelThree] = Level4;	
-
-		level_name[Level1] = "Base";
-		level_name[Level2] = "Shift";
-		level_name[Level3] = "Level3";
-		level_name[Level4] = "Shift Level3";
-		level_name[Level5] = "Caps";
-		level_name[Level6] = "Shift Caps";
-
-	};
-};
-
 default partial alphanumeric_keys 
 xkb_symbols "{{ name }}" {
     name[Group1]= "{{ group_name }}";
