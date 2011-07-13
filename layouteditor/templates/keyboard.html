@@ -85,9 +85,9 @@
 	</div></td>
 	</tr><tr>
     <td colspan="2">
-	<button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored">
-	  Use mirroring
-	</button>
+	<input dojoType="dijit.form.CheckBox" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored" value="on />
+	<label for="mirrored">Use mirroring</label>
+	</input>
 	</td>
 	</tr><tr><td colspan="2">
    <button dojoType="dijit.form.Button" type="submit">Generate layout file</button>
@@ -101,6 +101,7 @@
     dojo.require("dijit.form.Button");
     dojo.require("dijit.form.Select");
     dojo.require("dijit.form.Form");
+    dojo.require("dijit.form.CheckBox");
         
     function changeRefVisible() {
       var effect = this.checked ? dojo.fadeIn : dojo.fadeOut
