@@ -7,24 +7,31 @@ xkb_symbols "{{ name }}" {
     name[Group1]= "{{ group_name }}";
 
     // First row
-    {% for key in key_rows.0 %}{% if forloop.first %}key <TLDE> { {% if key.caps_keys %}type[Group1]="SIX_LEVEL",
+    {% for key in key_rows.0 %}{% if forloop.first %}key <TLDE> { {% if key.caps_keys %}type[Group1]="EIGHT_LEVEL",
                  {% endif %}[ {{ key.xkb_chars|join:",	" }}	] }; // {{ key.xkb_comments|join:", " }}{% else %}
-    key <AE{{ forloop.counter0|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="SIX_LEVEL",
+    key <AE{{ forloop.counter0|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="EIGHT_LEVEL",
                  {% endif %}[ {{ key.xkb_chars|join:",	" }}	] }; // {{ key.xkb_comments|join:", " }}{% endif %}{% endfor %}
 
     // Second row
-    {% for key in key_rows.1 %}{% if not forloop.last %}key <AD{{ forloop.counter|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="SIX_LEVEL",
+    {% for key in key_rows.1 %}{% if not forloop.last %}key <AD{{ forloop.counter|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="EIGHT_LEVEL",
                  {% endif %}[ {{ key.xkb_chars|join:",	" }}	] }; // {{ key.xkb_comments|join:", " }}
-    {% else %}key <BKSL> { {% if key.caps_keys %}type[Group1]="SIX_LEVEL",
+    {% else %}key <BKSL> { {% if key.caps_keys %}type[Group1]="EIGHT_LEVEL",
                  {% endif %}[ {{ key.xkb_chars|join:",	" }}	] }; // {{ key.xkb_comments|join:", " }}{% endif %}{% endfor %}
 
     // Third row
-    {% for key in key_rows.2 %}key <AC{{ forloop.counter|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="SIX_LEVEL",
+    {% for key in key_rows.2 %}key <AC{{ forloop.counter|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="EIGHT_LEVEL",
                  {% endif %}[ {{ key.xkb_chars|join:",	" }}	] }; // {{ key.xkb_comments|join:", " }}
     {% endfor %}
         
     // Fourth row
-    {% for key in key_rows.3 %}key <AB{{ forloop.counter|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="SIX_LEVEL",
+    {% for key in key_rows.3 %}key <AB{{ forloop.counter|stringformat:"02d" }}> { {% if key.caps_keys %}type[Group1]="EIGHT_LEVEL",
                  {% endif %}[ {{ key.xkb_chars|join:",	" }}	] }; // {{ key.xkb_comments|join:", " }}
     {% endfor %}
+    
+    {% if caps_defined %}
+    // Special override for use of Caps Lock with existing EIGHT_LEVEL key type
+    // This is for making the deployment of the generated file easy. For distribution,
+    // we probably need to define a new key type depending on the caps behavior chosen.
+    key <CAPS> { [ ISO_Level5_Lock ] };
+    {% endif %} 
 };

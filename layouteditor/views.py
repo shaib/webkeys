@@ -251,7 +251,8 @@ def gen_xkb(request, name):
                                     'name':name,
                                     'group_name': group_name,
                                     'mirrored': mirrored,
-                                    'mirror_comment': km.XKB_MIRROR_COMMENT if mirrored else "", 
+                                    'mirror_comment': km.XKB_MIRROR_COMMENT if mirrored else "",
+                                    'caps_defined': any(k.caps_keys for k in row for row in kb) 
                                   }, 
                                   context_instance=RequestContext(request),
                                   mimetype="text/plain")
