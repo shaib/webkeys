@@ -45,6 +45,7 @@ __all__ = ['get', 'choices']
 # Each function is presented by name (parameter to caps_lock decorator)
 # and description (first line of doc)
 import unicodedata as U
+from keymaps import mirror
 
 @caps_option("Default")
 def default(key):
@@ -56,6 +57,12 @@ def latin(key):
     "Turn the keyboard to latin (US) in first two levels"
     return key.ref1.lower(), key.ref2.upper()
 
+@caps_option("Mirrored Latin")
+def mirrored_latin(key):
+    "Turn the keyboard to latin (US) in first two levels, but apply mirroring"
+    m = lambda u:mirror(u, True)
+    return map (m, (key.ref1.lower(), key.ref2.upper()))
+
 @caps_option("Capitals")
 def capitals(key):
     "Make latin letter keys produce capitals, others unshifted US; with shift, Hebrew letters and otherwise shifted Hebrew."
@@ -64,3 +71,8 @@ def capitals(key):
     is_shifted_latin = key.level_chars[2].isalpha()
     shifted = key.level_chars[1] if (is_hebrew_letter or is_shifted_latin) else key.level_chars[2]
     return unshifted, shifted
+
+@caps_option("Lock Level 3")
+def lock3(key):
+    "Lock level 3, shift produces level 4"
+    return key.level_chars[3:]
