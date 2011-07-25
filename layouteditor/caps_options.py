@@ -24,17 +24,16 @@ def caps_option(name):
 def get(name):
     return options[name] if name else default
 
-def _choice_text(name,func):
+def _tooltip(name,func):
     if func.func_doc:
-        desc = func.func_doc.split("\n",1)[0] 
-        return "%s: %s" % (name, desc)
+        return func.func_doc.split("\n",1)[0] 
     else:
-        return name
+        return None
      
 def choices():
-    return tuple((name, _choice_text(name, func))
+    return tuple((name, func.func_name, _tooltip(name, func))
                   for name,func 
-                  in options.iteritems())
+                  in sorted (options.items(),key=lambda kv:kv[1].func_name))
 
 __all__ = ['get', 'choices']
 #
@@ -47,8 +46,9 @@ __all__ = ['get', 'choices']
 import unicodedata as U
 from keymaps import mirror
 
+# This function's name is capitalized to make it first in the ordering.
 @caps_option("Default")
-def default(key):
+def Default(key): 
     "Caps lock behavior not specified by mapping"
     return None
 
@@ -58,7 +58,7 @@ def latin(key):
     return key.ref1.lower(), key.ref2.upper()
 
 @caps_option("Mirrored Latin")
-def mirrored_latin(key):
+def latin_mirrored(key):
     "Turn the keyboard to latin (US) in first two levels, but apply mirroring"
     m = lambda u:mirror(u, True)
     return map (m, (key.ref1.lower(), key.ref2.upper()))
