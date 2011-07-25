@@ -71,26 +71,37 @@
   <div class="control">
     <table>
     <tr>
-    <td>Type of file to generate:</td>
-  	<td><div name="type" value="xkb" dojoType="dijit.form.Select">
-	    <span value="xkb">xkb symbols file</span>
-    	<span value="klc">KLC file</span>
-	</div></td>
+    <th>Type of file to generate:</th>
+  	<td>
+  	  <input type="radio" dojoType="dijit.form.RadioButton" name="type" value="klc" id="type_klc" checked="checked" />
+  	  <label for="type_klc">KLC file</label>
+  	</td><td>
+  	  <input type="radio" dojoType="dijit.form.RadioButton" name="type" value="xkb" id="type_xkb" />
+  	  <label for="type_xkb">xkb symbols file</label>
+	</td>
 	</tr><tr>
-	<td>Caps lock behavior:</td>
-  	<td><div name="caps_option" value="" dojoType="dijit.form.Select">
-  	{% for opt,desc in caps_choices %}
-	    <span value="{{ opt }}">{{ desc }}</span>
+	<th>Caps lock behavior:</th>
+  	{% for name,opt,tooltip in caps_choices %}
+  	  <td class="option">
+  	  <input type="radio" dojoType="dijit.form.RadioButton" name="caps_option" 
+  	   value="{{ name }}" id="caps_opt_{{ opt }}" />
+  	  <label for="caps_opt_{{ opt }}">{{ name }}</label>
+  	  <div class="tooltip">{{ tooltip|safe }}</div>
+	  </td>
+	  {% cycle '' '</tr><tr><th></th>' %}
 	{% endfor %}
-	</div></td>
 	</tr><tr>
-    <td colspan="2">
-	<input dojoType="dijit.form.CheckBox" checked iconClass="dijitCheckBoxIcon" id="id_mirrored" name="mirrored" value="on />
-	<label for="mirrored">Use mirroring</label>
+    <th>Use mirroring:</th>
+    <td>
+  	  <input type="radio" dojoType="dijit.form.RadioButton" name="mirrored" value="on" id="mirroring_on" checked="checked" />
+  	  <label for="mirroring_on">yes</label>
+  	</td><td>
+  	  <input type="radio" dojoType="dijit.form.RadioButton" name="mirrored" value="" id="mirroring_off" />
+  	  <label for="mirroring_off">no</label>
 	</input>
 	</td>
-	</tr><tr><td colspan="2">
-   <button dojoType="dijit.form.Button" type="submit">Generate layout file</button>
+	</tr><tr><th></th><td colspan="2">
+      <button dojoType="dijit.form.Button" type="submit">Generate layout file</button>
    	</td></tr>
    	</table>
   </div>
@@ -148,6 +159,7 @@
         installVisible("show3", ".kbkeylevel3")
         installVisible("show4", ".kbkeylevel4")
         dojo.query(".kbkey").forEach(installTooltip)
+        dojo.query(".option").forEach(installTooltip)
     }) 
  </script>
 {% endblock %}

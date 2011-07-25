@@ -12,4 +12,7 @@
  	display: inline; 
  	letter-spacing: 0; word-spacing: 0; white-space: nowrap; 
  }
+ th {
+ 	text-align: right;
+ }
 </style>

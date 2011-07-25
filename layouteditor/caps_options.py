@@ -22,11 +22,12 @@ def caps_option(name):
     return register
 
 def get(name):
-    return options[name] if name else default
+    return options[name] if name else Default
 
 def _tooltip(name,func):
     if func.func_doc:
-        return func.func_doc.split("\n",1)[0] 
+        text = func.func_doc.strip()
+        return "<br/>".join(text.split("\n")) 
     else:
         return None
      
@@ -59,13 +60,20 @@ def latin(key):
 
 @caps_option("Mirrored Latin")
 def latin_mirrored(key):
-    "Turn the keyboard to latin (US) in first two levels, but apply mirroring"
+    """
+    Turn the keyboard to latin (US) in first two levels, 
+    but apply mirroring to restore latin-like behavior
+    (useful for a layout with mirroring)
+    """
     m = lambda u:mirror(u, True)
     return map (m, (key.ref1.lower(), key.ref2.upper()))
 
 @caps_option("Capitals")
 def capitals(key):
-    "Make latin letter keys produce capitals, others unshifted US; with shift, Hebrew letters and otherwise shifted Hebrew."
+    """
+    Make latin letter keys produce capitals, others unshifted US; 
+    with shift, Hebrew letters and otherwise shifted Hebrew.
+    """
     unshifted = key.ref1.upper()
     is_hebrew_letter = U.name(key.level_chars[1]).startswith('HEBREW LETTER')
     is_shifted_latin = key.level_chars[2].isalpha()
