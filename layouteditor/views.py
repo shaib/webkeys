@@ -12,7 +12,9 @@ from django.conf import settings
 from models import KeyBinding, Layout, Level
 from forms import KeyForm, CloneForm, FontForm
 import keymaps as km
-import caps_options as caps
+import caps_options_utils as caps
+import caps_options # just to load the options;  @UnusedImport
+
 
 __all__ = ["show_layout",
            "set_layout_font", "edit_key",
@@ -157,6 +159,14 @@ class Key(BaseKey):
         # Note: the above similar lines use self.levels1, where level 1 is at index 0.
         return [u.char if u else u for u in self.levels]
     
+    @property
+    def ref_chars(self):
+        """
+        For use in caps options. Returns the chars of the reference levels, with level 1 at index 1.
+        Makes caps_options functions cleaner, because it hides the little caps ugliness in the
+        reference levels.
+        """
+        return (None, self.ref1.lower(), self.ref2.upper())
 
     
 def kb105():
