@@ -113,7 +113,51 @@
     dojo.require("dijit.form.Select");
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.CheckBox");
-        
+    dojo.require("dojo.cookie");
+       
+    function setCookieChecked()
+    {
+    	var ctrlId = this.id
+    	var checked = this.checked ? "checked" : "";
+    	dojo.cookie(ctrlId, checked,{expires:365})
+    }
+    function visibleFromCookie(item)
+    {
+    	var cookie = dojo.cookie(item.id)
+    	if (cookie != undefined) {
+    		if ((cookie && !item.checked) || (item.checked && !cookie)) {
+    			item.setChecked(cookie?true:false);
+    			//changeVisible.call(item)
+    		}
+    	}
+    }
+    function visibleRefFromCookie(item)
+    {
+    	var cookie = dojo.cookie(item.id)
+    	if (cookie != undefined) {
+    		if ((cookie && !item.checked) || (item.checked && !cookie)) {
+    			item.checked=(cookie?true:false);
+    			changeVisibleRef.call(item)
+    		}
+    	}
+    }
+    function radioFromCookie(item)
+    {
+    	var cookie = dojo.cookie(item.id)
+    	if (cookie != undefined) {
+    		if ((cookie && !item.checked) || (item.checked && !cookie)) {
+    			item.click()
+    		}
+    	}
+    }
+    function clearRadioCookies()
+    {
+    	var name = this.name
+    	var group = dojo.query('input[type="radio"][name="'+name+'"]')
+    	group.forEach(function(item) {
+    	  dojo.cookie(item.id, "")
+    	})
+    }
     function changeRefVisible() {
       var effect = this.checked ? dojo.fadeIn : dojo.fadeOut
       function fade(item) { effect({node: item}).play() } 
@@ -125,16 +169,19 @@
       if (this.checked==ref1and2) {
 	      dojo.query(".kbref1and2").forEach(fade)
       }
+      setCookieChecked.call(this)
     }
     function changeVisible() {
       var effect = this.checked ? dojo.fadeIn : dojo.fadeOut
       function fade(item) { effect({node: item}).play() } 
       dojo.query(this.target).forEach(fade)
+      setCookieChecked.call(this)
     }
     function installVisible(ctrlId, target) {
         var ctrl = dijit.byId(ctrlId)
         ctrl.set('target',target)
     	dojo.connect(ctrl, "onChange", changeVisible)
+    	visibleFromCookie(ctrl)
     }
     
     function showTooltip() {
@@ -151,15 +198,26 @@
         var ctrl = dijit.byId("showref1")
         ctrl.set('target','.kbref1')
     	dojo.connect(ctrl, "onChange", changeRefVisible)
+    	visibleRefFromCookie(ctrl)
         ctrl = dijit.byId("showref2")
         ctrl.set('target','.kbref2')
     	dojo.connect(ctrl, "onChange", changeRefVisible)
+    	visibleRefFromCookie(ctrl)
         installVisible("show1", ".kbkeylevel1")
         installVisible("show2", ".kbkeylevel2")
         installVisible("show3", ".kbkeylevel3")
         installVisible("show4", ".kbkeylevel4")
         dojo.query(".kbkey").forEach(installTooltip)
         dojo.query(".option").forEach(installTooltip)
+        dojo.query('input[type="radio"]').forEach(function(item) {
+          dojo.connect(item, "onchange", clearRadioCookies)
+          dojo.connect(item, "onchange", setCookieChecked)
+        })
+        dojo.query('input[type="radio"]').forEach(function(item) {
+          dojo.connect(item, "onchange", clearRadioCookies)
+          dojo.connect(item, "onchange", setCookieChecked)
+        })
+        dojo.query('input[type="radio"]').forEach(radioFromCookie)		        
     }) 
  </script>
 {% endblock %}
