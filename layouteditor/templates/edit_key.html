@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-<h2>Key Binding - {{ ref }} [{{ name }}]</h2>
+<h2>Key Binding - {{ ref|safe }} [{{ name }}]</h2>
 <form action="" method="post">{% csrf_token %}
     <div class="explanations">
     <p>Fill in values for the different levels</p>

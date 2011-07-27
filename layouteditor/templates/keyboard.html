@@ -131,16 +131,6 @@
     		}
     	}
     }
-    function visibleRefFromCookie(item)
-    {
-    	var cookie = dojo.cookie(item.id)
-    	if (cookie != undefined) {
-    		if ((cookie && !item.checked) || (item.checked && !cookie)) {
-    			item.checked=(cookie?true:false);
-    			changeVisibleRef.call(item)
-    		}
-    	}
-    }
     function radioFromCookie(item)
     {
     	var cookie = dojo.cookie(item.id)
@@ -198,11 +188,11 @@
         var ctrl = dijit.byId("showref1")
         ctrl.set('target','.kbref1')
     	dojo.connect(ctrl, "onChange", changeRefVisible)
-    	visibleRefFromCookie(ctrl)
+    	visibleFromCookie(ctrl)
         ctrl = dijit.byId("showref2")
         ctrl.set('target','.kbref2')
     	dojo.connect(ctrl, "onChange", changeRefVisible)
-    	visibleRefFromCookie(ctrl)
+    	visibleFromCookie(ctrl)
         installVisible("show1", ".kbkeylevel1")
         installVisible("show2", ".kbkeylevel2")
         installVisible("show3", ".kbkeylevel3")
