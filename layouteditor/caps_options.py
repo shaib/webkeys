@@ -71,6 +71,8 @@ old_si1452_nikud = {
     u'0': u'\u05c1', # Shin dot
     u'-': u'\u05b9', # Holam
     u'=': u'\u05bc', # Dagesh/Shuruq
+
+    u'\\': u'\u05bb', # Qubuts
 }
 
 @caps_option("SI1452")
