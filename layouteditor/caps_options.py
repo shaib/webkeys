@@ -56,3 +56,42 @@ def capitals(key):
 def lock3(key):
     "Lock level 3, shift produces level 4"
     return key.level_chars[3:]
+
+old_si1452_nikud = {
+    u'`': u'\u05b0', # Sheva
+    u'1': u'\u05b1', # H. Segol
+    u'2': u'\u05b2', # H. Patah
+    u'3': u'\u05b3', # H.  Qamats
+    u'4': u'\u05b4', # Hiriq
+    u'5': u'\u05b5', # Tsere
+    u'6': u'\u05b6', # Segol
+    u'7': u'\u05b7', # Patah
+    u'8': u'\u05b8', # Qamats
+    u'9': u'\u05c2', # Sin dot
+    u'0': u'\u05c1', # Shin dot
+    u'-': u'\u05b9', # Holam
+    u'=': u'\u05bc', # Dagesh/Shuruq
+}
+
+@caps_option("SI1452")
+def SI1452(key):
+    """
+    The SI1452 draft recommendation:
+    Unshifted - like a US keyboard with CAPS locked
+    Shifted - like level 1, except the top row gets the old-standard nikud
+    """
+    ref_char = key.ref_chars[1]
+    unshifted = ref_char.upper()
+    try:
+        shifted = old_si1452_nikud[ref_char]
+    except KeyError:
+        shifted = key.level_chars[1]
+    return unshifted, shifted
+
+@caps_option("Caps Latin")
+def caps_latin(key):
+    "Act like a US keyboard with caps lock"
+    # That is, take keys from ref levels 1 and 2,
+    # and apply inverse capitalization
+    return key.ref_chars[1].upper(), key.ref_chars[2].lower()
+    
