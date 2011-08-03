@@ -1,0 +1,10 @@
+# Django basic
+Django==1.2
+wsgiref==0.1.2
+
+# Database migrations
+South==0.7.3
+
+# BrowserID from Mozilla. Project, not necessarily app, requirement.
+-e git+https://github.com/mozilla/django-browserid.git@e27d583f60dbd24718b20e64e128fc04767f9358#egg=django_browserid-0.1-py2.6-dev
+httplib2==0.7.1
