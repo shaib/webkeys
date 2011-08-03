@@ -15,4 +15,15 @@
  th {
  	text-align: right;
  }
+ 
+ #user_or_login {
+ 	position: fixed; 
+ 	top: 0;
+ 	width: 960px;
+ 	background: grey;
+ }
+ #user_or_login > * {
+ 	float: right;
+ }
+ 	
 </style>
