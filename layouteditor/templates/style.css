@@ -21,9 +21,12 @@
  	top: 0;
  	width: 960px;
  	background: grey;
+ 	color: white;
  }
  #user_or_login > * {
  	float: right;
  }
  	
+ .signout-link { color: white; background: red; text-decoration: none; }
+ 
 </style>

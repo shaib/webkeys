@@ -13,7 +13,10 @@
 
 <div id="user_or_login">
 {% if user.is_authenticated %}
-<span>Logged in as <span class="username">{{ user.get_full_name|default:user.email }}</span></span>
+<span>
+  Signed in as <span class="username">{{ user.get_full_name|default:user.email }}</span>
+  <a href="{% url signout %}" class="signout-link">Sign out</a>
+</span>
 {% else %}
 <a id="browserid" name="browserid">
 	<img src="https://browserid.org/i/sign_in_red.png" 
