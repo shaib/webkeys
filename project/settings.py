@@ -2,6 +2,9 @@
 
 import os
 
+project_dir = os.path.dirname(__file__)
+def in_project(*args): return os.path.join(project_dir, *args)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -77,9 +80,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'webkeys.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
+    in_project('templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
