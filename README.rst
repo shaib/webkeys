@@ -37,3 +37,12 @@ to do if and when:
 * Structured font selection
 * Tests
 
+To do before release
+====================
+
+* Use Ajax for key editing
+* Export/Import
+* User permissions
+* South
+* i18n and Hebrew
+

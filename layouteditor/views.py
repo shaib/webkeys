@@ -241,8 +241,7 @@ def show_layout(request, name='si1452'):
     return render_to_response("keyboard.html", 
                               {'key_rows':kb, 'name':name, 
                                'font': layout.font, 'font_form':font_form,
-                               'caps_choices': caps.choices(),
-                               'static_root': settings.MEDIA_URL},
+                               'caps_choices': caps.choices()},
                               context_instance=RequestContext(request))
 
 def gen_xkb(request, name):
@@ -318,6 +317,15 @@ def editable(char):
     else:
         return char
         
+def get_all_levels(layout, row, pos):
+    levels_qs = KeyBinding.objects.filter(level__layout=layout, row=row, pos=pos)
+    levels_all = levels_qs.select_related('level')[:]
+    levels = [None] * 5
+    for k in levels_all:
+        levels[k.mod_level] = k.char
+    
+    return levels
+
 @transaction.commit_on_success
 def edit_key(request, name=None, row=None, pos=None):
     if request.method=='GET':
@@ -326,11 +334,7 @@ def edit_key(request, name=None, row=None, pos=None):
         font = layout.font
         row = int(row)
         pos = int(pos)
-        levels_qs = KeyBinding.objects.filter(level__layout=layout, row=row, pos=pos)
-        levels_all = levels_qs.select_related('level')[:]
-        levels = [None]*5
-        for k in levels_all:
-            levels[k.mod_level]=k.char
+        levels = get_all_levels(layout, row, pos)
         form_data = dict(layout=layout, row=row, pos=pos)
         field_names = ["level%d" % (i+1) for i in range(4)]
         form_data.update(dict(zip(field_names, map(editable, levels[1:]))))

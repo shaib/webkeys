@@ -1,5 +1,4 @@
 from django.conf.urls.defaults import *  # @UnusedWildImport
-from django.conf import settings
 
 #import layouteditor
 # Uncomment the next two lines to enable the admin:
@@ -23,12 +22,3 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
 )
-if settings.DEBUG:
-    media_for_match = settings.MEDIA_URL
-    # Patchy, wrong, doesn't deal with urls including protocol etc.
-    if media_for_match[0]=='/': media_for_match = media_for_match[1:]
-    if media_for_match[-1]=='/': media_for_match = media_for_match[:-1]
-    static_url = r'^%s/(?P<path>.*)$' % media_for_match
-    urlpatterns += patterns('',
-        (static_url, 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    )
