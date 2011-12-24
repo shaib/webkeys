@@ -43,7 +43,7 @@ ZWNJ,ZWJ,CGJ=u'\u200c\u200d\u034f'
 NONSPACING_MARK = "Mn" # unicode category
 HTML_ALEPH = u'&#x05d0;'
 HTML_VAV = u'&#x05d5;'
-HTML_MEM = u'&#x05de;'
+HTML_BET = u'&#x05d1;'
 HTML_SHIN = u'&#x05e9;'
 
 VISIBLE_FORMATTING = {
@@ -197,7 +197,7 @@ def presentation(char,
     elif u==HOLAM_HASER_FOR_VAV:
         value = ADD_BASE % (HTML_VAV, html(u))
     elif category(u)==NONSPACING_MARK:
-        value = ADD_BASE % (HTML_MEM, html(u))
+        value = ADD_BASE % (HTML_BET, html(u))
     else:
         value = html(u)
         
