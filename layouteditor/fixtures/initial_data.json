@@ -5,7 +5,8 @@
     "fields": {
       "ref1": 1, 
       "ref2": 2, 
-      "name": "qwerty_ref"
+      "name": "qwerty_ref",
+      "owner" : 1
     }
   }, 
   {
@@ -14,7 +15,8 @@
     "fields": {
       "ref1": 1, 
       "ref2": 2, 
-      "name": "si1452"
+      "name": "si1452",
+      "owner" : 1
     }
   }, 
   {

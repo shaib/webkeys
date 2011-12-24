@@ -1,20 +1,27 @@
 from django.db import models
 from django.db import transaction
 
+from django.contrib.auth.models import User
+
 class Layout(models.Model):
-    name = models.CharField(max_length=64, unique=True)
+    owner = models.ForeignKey(User)
+    name = models.CharField(max_length=64)
     #num_levels = models.PositiveIntegerField(default=2)
     ref1 = models.ForeignKey("Level", null=True, related_name='ref1_using_layouts')
     ref2 = models.ForeignKey("Level", null=True, related_name='ref2_using_layouts')
     font = models.CharField(max_length=80, null=True, blank=True, default="verdana, ezra sil")
     
+    class Meta:
+        unique_together = (("owner", "name"),)
+        
     def __unicode__(self):
         return "Layout: " + self.name
     
     @transaction.commit_on_success
-    def clone(self, name):
+    def clone(self, owner, name):
         "Create a copy of me with a new name"
-        clon = Layout.objects.create(name=name, ref1=self.ref1, ref2=self.ref2,
+        clon = Layout.objects.create(owner=owner, name=name,
+                                     ref1=self.ref1, ref2=self.ref2,
                                      font=self.font)
         for level in self.level_set.all():
             level.clone(clon)
