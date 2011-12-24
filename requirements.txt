@@ -6,6 +6,6 @@ wsgiref==0.1.2
 South==0.7.3
 
 # BrowserID from Mozilla. Project, not necessarily app, requirement.
--e git+https://github.com/mozilla/django-browserid.git#egg=django_browserid-0.1-py2.6-dev
-# BrowserID dependency httplib2. httplib2==0.7.1 is broken.
--e hg+https://code.google.com/p/httplib2/@6525cadfde53#egg=httplib2
+-e git+https://github.com/mozilla/django-browserid.git#egg=django_browserid-0.9.2-py2.6-dev
+# BrowserID dependency httplib2.
+httplib2==0.7.2
