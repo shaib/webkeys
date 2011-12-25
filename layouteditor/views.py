@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 #from django.utils.html import escape as html_escape
 
+from django.contrib import messages
 from models import KeyBinding, Layout, Level
 from forms import KeyForm, CloneForm, FontForm
 import keymaps as km
@@ -213,8 +214,10 @@ def presentation(char,
  
 
 
-def make_view_keys(name):
-    qs = KeyBinding.objects.filter(level__layout__name=name).select_related("level")
+def make_view_keys(owner, name):
+    qs = KeyBinding.objects.filter(level__layout__owner__username=owner,
+                                   level__layout__name=name)
+    qs = qs.select_related("level")
     keys = list(qs)
     if not keys:
         raise Http404("Nothing defined for layout: " + name)
@@ -235,17 +238,17 @@ def make_view_keys(name):
     
     return layout, kb
 
-def show_layout(request, name='si1452'):
-    layout, kb = make_view_keys(name)
+def show_layout(request, owner, name):
+    layout, kb = make_view_keys(owner, name)
     font_form = FontForm({"font":layout.font})
     return render_to_response("keyboard.html", 
-                              {'key_rows':kb, 'name':name, 
+                              {'key_rows':kb, 'name':name, 'owner': owner, 
                                'font': layout.font, 'font_form':font_form,
                                'caps_choices': caps.choices()},
                               context_instance=RequestContext(request))
 
-def gen_xkb(request, name):
-    _, kb = make_view_keys(name)
+def gen_xkb(request, owner, name):
+    _, kb = make_view_keys(owner, name)
     group_name = request.GET.get('group_name', name)
     mirrored = request.GET.get('mirrored', False)
     caps_func = caps.get(request.GET.get('caps_option', None))
@@ -268,8 +271,8 @@ def gen_xkb(request, name):
     response['Content-Disposition'] = 'attachment; filename=%s' % name
     return response
 
-def gen_klc(request, name):
-    _, kb = make_view_keys(name)
+def gen_klc(request, owner, name):
+    _, kb = make_view_keys(owner, name)
     params = {}
     for n in ("localename","localeid","languagename"):
         params[n] = request.GET.get(n, None)
@@ -300,12 +303,12 @@ def gen_klc(request, name):
     finally:
         settings.FILE_CHARSET = save_charset
 
-def gen_map(request, name):
+def gen_map(request, owner, name):
     type = request.GET.get('type', 'undefined')
     if type=='xkb':
-        return gen_xkb(request, name)
+        return gen_xkb(request, owner, name)
     elif type=='klc':
-        return gen_klc(request, name)
+        return gen_klc(request, owner, name)
     else:
         raise Http404("Keymap of type '%s' not supported" % type)
 
@@ -327,10 +330,10 @@ def get_all_levels(layout, row, pos):
     return levels
 
 @transaction.commit_on_success
-def edit_key(request, name=None, row=None, pos=None):
+def edit_key(request, owner, name, row, pos):
     if request.method=='GET':
         # Show the existing key bindings
-        layout = get_object_or_404(Layout, name=name)
+        layout = get_object_or_404(Layout, owner__username=owner, name=name)
         font = layout.font
         row = int(row)
         pos = int(pos)
@@ -365,20 +368,26 @@ def edit_key(request, name=None, row=None, pos=None):
                 else:
                     KeyBinding.objects.filter(level__level=lvl, **key_params).delete()
             map(update_level,[1,2,3,4])
-            return redirect(reverse('show-layout', kwargs={"name": form.cleaned_data['layout'].name}))
+            return redirect(reverse('show-layout', kwargs={"name": layout.name, "owner": layout.owner}))
     
     return render_to_response("edit_key.html", locals(), context_instance=RequestContext(request) )
 
-def clone_layout(request, name):
+def clone_layout(request, owner, name):
+    user = request.user
+    if not user.is_authenticated():
+        messages.add_message(request, messages.ERROR, "You need to be logged in to create a layout")
+        return redirect(reverse('layouts'))
     if request.method!='POST':
         return HttpResponseBadRequest()
-    form = CloneForm(request.POST)
+    form = CloneForm(user, request.POST)
     if form.is_valid():
-        layout = get_object_or_404(Layout, name=name)
+        layout = get_object_or_404(Layout, owner__username=owner, name=name)
         new_name = form.cleaned_data['new_name']
-        layout.clone(new_name)
-        return redirect(reverse('show-layout', kwargs={"name": new_name}))
+        layout.clone(user, new_name)
+        return redirect(reverse('show-layout', kwargs={"name": new_name, "owner": user}))
     else:
+        for e in form.non_field_errors():
+            messages.add_message(request, messages.ERROR, e)
         return redirect(reverse('layouts'))
     
 def set_layout_font(request, name):

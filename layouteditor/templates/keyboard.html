@@ -40,7 +40,7 @@
  	<div class="kbrow">
     {% for key in row %}
  	   {% if key.levels %}
- 	   {% url edit-key name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
+ 	   {% url edit-key owner name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
  	   <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="window.location.href='{{ edit_url }}'">
  	   {% for char,style in key.refs.items %}
  	      <span class="{{ style }}">{{ char|default:"" }}</span>
@@ -67,7 +67,7 @@
  	<br>
  {% endfor %}
  </div>
- <form method="get" action="{% url gen-map name %}" dojoType="dijit.form.Form">
+ <form method="get" action="{% url gen-map owner name %}" dojoType="dijit.form.Form">
   <div class="control">
     <table>
     <tr>

@@ -44,6 +44,6 @@
     {{ form.layout }}
 <input type="submit" value="Save" />
 <input type="button" value="Cancel" 
- onclick="window.location.href='{% url show-layout name %}'"  />
+ onclick="window.location.href='{% url show-layout layout.owner name %}'"  />
 </form> 
 {% endblock %}
