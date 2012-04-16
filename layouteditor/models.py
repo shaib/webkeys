@@ -1,12 +1,10 @@
 from django.db import models
 from django.db import transaction
-
 from django.contrib.auth.models import User
 
 class Layout(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(max_length=64)
-    #num_levels = models.PositiveIntegerField(default=2)
     ref1 = models.ForeignKey("Level", null=True, related_name='ref1_using_layouts')
     ref2 = models.ForeignKey("Level", null=True, related_name='ref2_using_layouts')
     font = models.CharField(max_length=80, null=True, blank=True, default="verdana, ezra sil")

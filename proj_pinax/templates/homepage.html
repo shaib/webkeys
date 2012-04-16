@@ -1,0 +1,59 @@
+{% extends "banner_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "Welcome" %}{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block banner %}
+    <h1>{% trans "Welcome to Webkeys" %}</h1>
+    <p>
+        {% blocktrans %}
+        This is a little place for editing keyboard layouts. It was
+        designed for Hebrew keyboard layouts, so there are several
+        features you might not expect in a general layout editor: <ul>
+			<li>Fixed 4 shift levels</li>
+			<li>Reference layout (QWERTY) optionally shown</li>
+			<li>Generation of both KLC and XKB mapping files</li>
+			<li>Special support for presenting certain characters, including:<ul>
+	  			<li>Unicode joiner characters</li>
+	  			<li>Unicode BiDi direction markers (RTL & LTR)</li>
+	  			<li>Hebrew points (ניקוד)</li>
+	  			<li>Hebrew accents (טעמים)</li>
+  		</ul></li></ul>
+        {% endblocktrans %}
+    </p>
+    
+    {% if user.is_authenticated %}
+        {% url what_next as what_next_url %}
+        <p class="what_next">{% blocktrans %}Wondering <a href="{{ what_next_url }}" class="btn primary large">What Next</a>?{% endblocktrans %}</p>
+    {% else %}
+        <p>{% blocktrans %}Browse and use existing layouts freely.{% endblocktrans %}</p>
+        {% url acct_login as login_url %}
+        {% ifsetting ACCOUNT_OPEN_SIGNUP %}
+            {% url acct_signup as signup_url %}
+            <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn">Log In</a> or <a href="{{ signup_url }}" class="btn primary">Sign Up</a> to edit your own layouts.{% endblocktrans %}</p>
+        {% else %}
+            <p>{% blocktrans %}You can <a href="{{ login_url }}" class="btn primary large">Log In</a> to edit your own layouts.{% endblocktrans %}</p>
+        {% endifsetting %}
+    {% endif %}
+{% endblock %}
+
+{% block column-1 %}
+	<h2>{% trans "Users" %}</h2>
+   {% include "_users.html" %}
+{% endblock %}
+{% block column-2 %}
+	<h2>{% trans "Layouts" %}</h2>
+   {% include "_layouts.html" %}
+{% endblock %}
+{% block column-3 %}
+	<h2>{% trans "Standard" %}</h2>
+   {% include "_stdlayouts.html" %}
+{% endblock %}
+{% block column-4 %}
+	<h2>{% trans "Using layouts" %}</h2>
+   {% include "_usage.html" %}
+{% endblock %}
