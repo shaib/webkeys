@@ -125,7 +125,9 @@ AUTHENTICATION_BACKENDS = (
 BROWSERID_CREATE_USER = True
 # Use SSL certificates for HTTPS
 BROWSERID_CACERT_FILE = '/etc/ssl/certs/ca-certificates.crt'
-
+# The domain identifies the site
+DOMAIN = 'webkeys.platonix.co.il'
+ 
 LOGIN_REDIRECT_URL = '/'
 
 
