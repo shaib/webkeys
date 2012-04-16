@@ -7,5 +7,5 @@ South==0.7.3
 
 # BrowserID from Mozilla. Project, not necessarily app, requirement.
 -e git+https://github.com/mozilla/django-browserid.git#egg=django_browserid-0.9.2-py2.6-dev
-# BrowserID dependency httplib2. httplib2==0.7.1 is broken.
-httplib2=0.7.2
+# BrowserID dependency httplib2.
+httplib2==0.7.2

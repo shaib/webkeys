@@ -16,10 +16,11 @@
 <table>
 {% for layout in layout_list %}
   <tr class="layout_block">
-    <td><a href="{% url show-layout layout.name %}">{{ layout.name }}</a></td>
+    <td><a href="{% url show-layout layout.owner layout.name %}">{{ layout.owner }}/{{ layout.name }}</a></td>
     <td>
-    <form method="post" action="{% url clone-layout layout.name %}">{% csrf_token %}
+    <form method="post" action="{% url clone-layout layout.owner layout.name %}">{% csrf_token %}
       {{ form.new_name }}
+      {{ form.errors }}
       <input type="submit" value="Clone"/>
     </form>
     </td>
