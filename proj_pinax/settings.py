@@ -165,6 +165,7 @@ INSTALLED_APPS = [
     "pagination",
     "idios",
     "metron",
+    "south",
     
     # Pinax
     "pinax.apps.account",
