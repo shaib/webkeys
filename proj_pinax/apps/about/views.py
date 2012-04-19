@@ -8,6 +8,6 @@ from django.template.context import RequestContext
 def homepage(request):
     context = RequestContext(request, dict(
         users = User.objects.order_by("?")[:10],
-        layouts = Layout.objects.order_by("?")[:10],
-        stdlayouts = Layout.objects.filter(owner__isnull=True)))
+        layouts = Layout.objects.filter(owner__gt=1).order_by("?")[:10],
+        stdlayouts = Layout.objects.filter(owner=1)))
     return render(request, "homepage.html", context_instance=context)

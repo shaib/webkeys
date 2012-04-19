@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import transaction
 from django.contrib.auth.models import User
+from django.db.models import permalink
 
 class Layout(models.Model):
     owner = models.ForeignKey(User)
@@ -15,6 +16,10 @@ class Layout(models.Model):
     def __unicode__(self):
         return "Layout: " + self.name
     
+    @permalink
+    def get_absolute_url(self):
+        return ("show-layout", (self.owner.username, self.name))
+        
     @transaction.commit_on_success
     def clone(self, owner, name):
         "Create a copy of me with a new name"

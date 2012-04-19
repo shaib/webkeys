@@ -1,2 +1,3 @@
-<p>Place Holder</p>
-<p>Place Holder</p>
+{% for layout in stdlayouts %}
+<p><a href="{{ layout.get_absolute_url }}">{{ layout.name }}</a></p>
+{% endfor %}

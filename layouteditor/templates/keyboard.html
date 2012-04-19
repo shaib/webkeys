@@ -1,23 +1,30 @@
-{% extends "base.html" %}
+{% extends "site_base.html" %}
 
-{% block title %}Keyboard Layout Editor - {{ name }}{% endblock %}
+{% block head_title %}Keyboard Layout Editor - {{ name }}{% endblock %}
 
-{% block header %}
+{% block extra_head %}
 {% include "style.css" %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kb-style.css" />
 {% endblock %}
 
-{% block content %}
+{% block body %}
  <h2>Keyboard Layout - {{ name }}</h2>
  <div class="control">
-   Show reference: 
+   <table>
+   <tr>
+   <th>Show reference: </th>
+   <td> 
    <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="showref1">
      level 1
    </button>
    <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="showref2">
      level 2 (Shift)
    </button>
-   Show layout:
+   </td>
+   </tr>
+   <tr>
+   <th>Show layout: </th>
+   <td>   
    <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show1">
      level 1
    </button>
@@ -30,9 +37,16 @@
    <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show4">
      level 4 (AltGr+Shift)
    </button>
+   </td>
+   </tr>
+   <tr>
+   	<td colspan="2">
     <form method="post" action="{% url set-layout-font name %}">{% csrf_token %}
       {{ font_form.as_p }}
     </form>
+    <td colspan="2">
+   </tr>
+   </table>
  </div>
  <div class="keyboard">
  {% for row in key_rows %}
