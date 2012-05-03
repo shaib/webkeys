@@ -1,0 +1,42 @@
+<style type="text/css">
+ .kberror { font-weight: bold; color: red; }
+ .kberror :only-child { list-style-type: none; }
+ .fieldWrapper th { text-align: left; }
+</style>
+
+<h2>Key Binding - {{ ref|safe }} [{{ name }}]</h2>
+<form action="" method="post">{% csrf_token %}
+    <div class="explanations">
+    <p>Fill in values for the different levels</p>
+    <p>Each value can be a single character or a hexadecimal code</p>
+    </div>
+    {{ form.non_field_errors }}
+    <table>
+    <tr class="fieldWrapper">
+        <th><label for="id_level1">Level 1 (now {{ pres1.html|default:"unassigned"|safe }}&lrm;)</label></th>
+        <td>{{ form.level1 }}</td>
+        <td class="kberror">{{ form.level1.errors }}</td>
+    </tr>
+    <tr class="fieldWrapper">
+        <th><label for="id_level2">Level 2 (now {{ pres2.html|default:"unassigned"|safe }}&lrm;)</label></th>
+        <td>{{ form.level2 }}</td>
+        <td class="kberror">{{ form.level2.errors }}</td>
+    </tr>
+    <tr class="fieldWrapper">
+        <th><label for="id_level3">Level 3 (now {{ pres3.html|default:"unassigned"|safe }}&lrm;)</label></th>
+        <td>{{ form.level3 }}</td>
+        <td class="kberror">{{ form.level3.errors }}</td>
+    </tr>
+    <tr class="fieldWrapper">
+        <th><label for="id_level4">Level 4 (now {{ pres4.html|default:"unassigned"|safe }}&lrm;)</label></th>
+        <td>{{ form.level4 }}</td>
+        <td class="kberror">{{ form.level4.errors }}</td>
+    </tr>
+    </table>
+    {{ form.row }}
+    {{ form.pos }}
+    {{ form.layout }}
+<input type="submit" value="Save" />
+<input type="button" value="Cancel" 
+ onclick="window.location.href='{% url show-layout layout.owner name %}'"  />
+</form> 

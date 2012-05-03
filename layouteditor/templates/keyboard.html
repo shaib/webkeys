@@ -57,7 +57,7 @@
     {% for key in row %}
  	   {% if key.levels %}
  	   {% url edit-key owner name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
- 	   <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="window.location.href='{{ edit_url }}'">
+ 	   <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="openKeyEditForm('{{ edit_url }}')">
  	   {% for char,style in key.refs.items %}
  	      <span class="{{ style }}">{{ char|default:"" }}</span>
  	   {% endfor %}
@@ -124,6 +124,28 @@
  </form>
  
  <script type="text/javascript">
+    function openKeyEditForm(key_url)
+    {
+    	require(['dojo/_base/xhr'], function(xhr) {
+    		xhr.get({
+    			url: key_url,
+    			handleAs: "json",
+    			error: function(message) { alert("Edit failed!!!\n"+message); },
+    			load: function(result) {
+    				updateKeyEditForm(result);
+    				showKeyEditForm();
+    			}
+    		})
+    	})
+    }
+    function updateKeyEditForm(key_data)
+    {
+    	alert("Updating the form is not implemented yet!"); // TODO: fixme
+    }
+    function showKeyEditForm(key_data)
+    {
+        alert("Updating the form is not implemented yet!"); // TODO: fixme
+    }
     function setCookieChecked()
     {
     	var ctrlId = this.id
