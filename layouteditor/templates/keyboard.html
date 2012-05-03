@@ -14,10 +14,12 @@
    <tr>
    <th>Show reference: </th>
    <td> 
-   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="showref1">
-     level 1
-   </button>
-   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="showref2">
+   {# For some reason the iconClass in data-dojo-props doesn't work. Figure it out later #}
+   <button data-dojo-type="dijit.form.ToggleButton" id="showref1"
+           data-dojo-props="iconClass:'dijitCheckBoxIcon', checked: true"
+           checked iconClass="dijitCheckBoxIcon"
+           >level 1</button>
+   <button data-dojo-type="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="showref2">
      level 2 (Shift)
    </button>
    </td>
@@ -25,16 +27,16 @@
    <tr>
    <th>Show layout: </th>
    <td>   
-   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show1">
+   <button data-dojo-type="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show1">
      level 1
    </button>
-   <button dojoType="dijit.form.ToggleButton" cleared iconClass="dijitCheckBoxIcon" id="show2">
+   <button data-dojo-type="dijit.form.ToggleButton" cleared iconClass="dijitCheckBoxIcon" id="show2">
      level 2 (Shift)
    </button>
-   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show3">
+   <button data-dojo-type="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show3">
      level 3 (AltGr)
    </button>
-   <button dojoType="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show4">
+   <button data-dojo-type="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show4">
      level 4 (AltGr+Shift)
    </button>
    </td>
@@ -81,23 +83,23 @@
  	<br>
  {% endfor %}
  </div>
- <form method="get" action="{% url gen-map owner name %}" dojoType="dijit.form.Form">
+ <form method="get" action="{% url gen-map owner name %}" data-dojo-type="dijit.form.Form">
   <div class="control">
     <table>
     <tr>
     <th>Type of file to generate:</th>
   	<td>
-  	  <input type="radio" dojoType="dijit.form.RadioButton" name="type" value="klc" id="type_klc" checked="checked" />
+  	  <input type="radio" data-dojo-type="dijit.form.RadioButton" name="type" value="klc" id="type_klc" checked="checked" />
   	  <label for="type_klc">KLC file</label>
   	</td><td>
-  	  <input type="radio" dojoType="dijit.form.RadioButton" name="type" value="xkb" id="type_xkb" />
+  	  <input type="radio" data-dojo-type="dijit.form.RadioButton" name="type" value="xkb" id="type_xkb" />
   	  <label for="type_xkb">xkb symbols file</label>
 	</td>
 	</tr><tr>
 	<th>Caps lock behavior:</th>
   	{% for name,opt,tooltip in caps_choices %}
   	  <td class="option">
-  	  <input type="radio" dojoType="dijit.form.RadioButton" name="caps_option" 
+  	  <input type="radio" data-dojo-type="dijit.form.RadioButton" name="caps_option" 
   	   value="{{ name }}" id="caps_opt_{{ opt }}" />
   	  <label for="caps_opt_{{ opt }}">{{ name }}</label>
   	  <div class="tooltip">{{ tooltip|safe }}</div>
@@ -107,27 +109,21 @@
 	</tr><tr>
     <th>Use mirroring:</th>
     <td>
-  	  <input type="radio" dojoType="dijit.form.RadioButton" name="mirrored" value="on" id="mirroring_on" checked="checked" />
+  	  <input type="radio" data-dojo-type="dijit.form.RadioButton" name="mirrored" value="on" id="mirroring_on" checked="checked" />
   	  <label for="mirroring_on">yes</label>
   	</td><td>
-  	  <input type="radio" dojoType="dijit.form.RadioButton" name="mirrored" value="" id="mirroring_off" />
+  	  <input type="radio" data-dojo-type="dijit.form.RadioButton" name="mirrored" value="" id="mirroring_off" />
   	  <label for="mirroring_off">no</label>
 	</input>
 	</td>
 	</tr><tr><th></th><td colspan="2">
-      <button dojoType="dijit.form.Button" type="submit">Generate layout file</button>
+      <button data-dojo-type="dijit.form.Button" type="submit">Generate layout file</button>
    	</td></tr>
    	</table>
   </div>
  </form>
  
  <script type="text/javascript">
-    dojo.require("dijit.form.Button");
-    dojo.require("dijit.form.Select");
-    dojo.require("dijit.form.Form");
-    dojo.require("dijit.form.CheckBox");
-    dojo.require("dojo.cookie");
-       
     function setCookieChecked()
     {
     	var ctrlId = this.id
@@ -197,30 +193,43 @@
     	dojo.connect(item,"onmouseover",showTooltip)
     	dojo.connect(item,"onmouseout",hideTooltip)
     }
-    dojo.addOnLoad(function() {
-        var ctrl = dijit.byId("showref1")
-        ctrl.set('target','.kbref1')
-    	dojo.connect(ctrl, "onChange", changeRefVisible)
-    	visibleFromCookie(ctrl)
-        ctrl = dijit.byId("showref2")
-        ctrl.set('target','.kbref2')
-    	dojo.connect(ctrl, "onChange", changeRefVisible)
-    	visibleFromCookie(ctrl)
-        installVisible("show1", ".kbkeylevel1")
-        installVisible("show2", ".kbkeylevel2")
-        installVisible("show3", ".kbkeylevel3")
-        installVisible("show4", ".kbkeylevel4")
-        dojo.query(".kbkey").forEach(installTooltip)
-        dojo.query(".option").forEach(installTooltip)
-        dojo.query('input[type="radio"]').forEach(function(item) {
-          dojo.connect(item, "onchange", clearRadioCookies)
-          dojo.connect(item, "onchange", setCookieChecked)
-        })
-        dojo.query('input[type="radio"]').forEach(function(item) {
-          dojo.connect(item, "onchange", clearRadioCookies)
-          dojo.connect(item, "onchange", setCookieChecked)
-        })
-        dojo.query('input[type="radio"]').forEach(radioFromCookie)		        
-    }) 
+    require(["dojo/parser",
+             "dojo/ready",
+             "dijit/registry",
+             "dijit/form/Button",
+             "dijit/form/Select",
+             "dijit/form/CheckBox",
+             "dijit/form/RadioButton",
+             "dijit/form/Form",
+             "dojo/cookie", 
+             "dojo/domReady!"], 
+        function(parser, ready, dijit) {
+        	ready(function() {
+		        var ctrl = dijit.byId("showref1")
+		        ctrl.set('target','.kbref1')
+		    	dojo.connect(ctrl, "onChange", changeRefVisible)
+		    	visibleFromCookie(ctrl)
+		        ctrl = dijit.byId("showref2")
+		        ctrl.set('target','.kbref2')
+		    	dojo.connect(ctrl, "onChange", changeRefVisible)
+		    	visibleFromCookie(ctrl)
+		        installVisible("show1", ".kbkeylevel1")
+		        installVisible("show2", ".kbkeylevel2")
+		        installVisible("show3", ".kbkeylevel3")
+		        installVisible("show4", ".kbkeylevel4")
+		        dojo.query(".kbkey").forEach(installTooltip)
+		        dojo.query(".option").forEach(installTooltip)
+		        dojo.query('input[type="radio"]').forEach(function(item) {
+		          dojo.connect(item, "onchange", clearRadioCookies)
+		          dojo.connect(item, "onchange", setCookieChecked)
+		        })
+		        dojo.query('input[type="radio"]').forEach(function(item) {
+		          dojo.connect(item, "onchange", clearRadioCookies)
+		          dojo.connect(item, "onchange", setCookieChecked)
+		        })
+		        dojo.query('input[type="radio"]').forEach(radioFromCookie)
+                })
+        }
+    )
  </script>
 {% endblock %}
