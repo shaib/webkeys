@@ -33,5 +33,11 @@
  	padding: 0.3em; 
  	border-radius: 0.4em; 
  	-moz-border-radius: 0.4em; 
- } 
+ }
+ 
+ /* for key editing */
+ .kberror, .kberror li { font-weight: bold; color: red; }
+ .kberror :only-child { list-style-type: none; }
+ .fieldWrapper th { text-align: left; }
+
 </style>

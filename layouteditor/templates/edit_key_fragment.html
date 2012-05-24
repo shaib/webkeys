@@ -1,11 +1,6 @@
-<style type="text/css">
- .kberror { font-weight: bold; color: red; }
- .kberror :only-child { list-style-type: none; }
- .fieldWrapper th { text-align: left; }
-</style>
 
-<h2>Key Binding - {{ ref|safe }} [{{ name }}]</h2>
-<form action="" method="post">{% csrf_token %}
+<h2>Key Binding - {{ ref|safe }}</h2>
+<form action="{% url edit-key owner name row pos %}" method="post">{% csrf_token %}
     <div class="explanations">
     <p>Fill in values for the different levels</p>
     <p>Each value can be a single character or a hexadecimal code</p>
@@ -36,7 +31,5 @@
     {{ form.row }}
     {{ form.pos }}
     {{ form.layout }}
-<input type="submit" value="Save" />
-<input type="button" value="Cancel" 
- onclick="window.location.href='{% url show-layout layout.owner name %}'"  />
+    <input type="button" value="Save" onclick="submitKeyEditForm(this.form);" />
 </form> 

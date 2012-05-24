@@ -370,7 +370,8 @@ def edit_key(request, owner, name, row, pos):
             map(update_level,[1,2,3,4])
             return redirect(reverse('show-layout', kwargs={"name": layout.name, "owner": layout.owner}))
     
-    return render_to_response("edit_key.html", locals(), context_instance=RequestContext(request) )
+    template_name = "edit_key_fragment.html" if request.is_ajax else "edit_key.html"
+    return render_to_response(template_name, locals(), context_instance=RequestContext(request) )
 
 def clone_layout(request, owner, name):
     user = request.user

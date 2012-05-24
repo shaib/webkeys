@@ -9,6 +9,7 @@
 
 {% block body %}
  <h2>Keyboard Layout - {{ name }}</h2>
+ <div id="edit_key_dialog" data-dojo-type="dijit.Dialog" title="Edit Key" style="display: none;"></div>
  <div class="control">
    <table>
    <tr>
@@ -126,26 +127,29 @@
  <script type="text/javascript">
     function openKeyEditForm(key_url)
     {
-    	require(['dojo/_base/xhr'], function(xhr) {
-    		xhr.get({
-    			url: key_url,
-    			handleAs: "json",
-    			error: function(message) { alert("Edit failed!!!\n"+message); },
-    			load: function(result) {
-    				updateKeyEditForm(result);
-    				showKeyEditForm();
-    			}
-    		})
-    	})
+    	var dialog = dijit.byId('edit_key_dialog');
+    	dialog.set('href', key_url);
+    	dialog.show();
     }
-    function updateKeyEditForm(key_data)
-    {
-    	alert("Updating the form is not implemented yet!"); // TODO: fixme
-    }
-    function showKeyEditForm(key_data)
-    {
-        alert("Updating the form is not implemented yet!"); // TODO: fixme
-    }
+    function submitKeyEditForm(form)
+	{
+	    require(['dojo/_base/xhr'], function(xhr) {
+	        xhr.post({
+	            form: form,
+	            timeout: 3000,
+	            error: function(message) { alert("Edit failed!!!\n"+message); },
+	            load: function(page) {
+	            	// If the page returned is the form...
+	            	if (page.search('<label for='+'"id_level1">')>=0) // TODO: breaking the string so isn't found in this source... cleaner: Remove js to separate file. 
+	                   form.parentNode.innerHTML = page;
+	                else
+	                   window.location.href = window.location.href; // TODO: Find a nicer way to reload? Update character only?
+	            }
+	        })
+	    })
+	}
+
+
     function setCookieChecked()
     {
     	var ctrlId = this.id
@@ -223,6 +227,7 @@
              "dijit/form/CheckBox",
              "dijit/form/RadioButton",
              "dijit/form/Form",
+             "dijit/Dialog",
              "dojo/cookie", 
              "dojo/domReady!"], 
         function(parser, ready, dijit) {
