@@ -3,7 +3,8 @@ from unicodedata import category, name as char_name
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.db import transaction
-from django.http import Http404, HttpResponseBadRequest
+from django.http import Http404, HttpResponseBadRequest, HttpResponse
+from django.template import loader
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -15,6 +16,7 @@ from forms import KeyForm, CloneForm, FontForm
 import keymaps as km
 import caps_options_utils as caps
 import caps_options # just to load the options;  @UnusedImport
+from django.utils import simplejson
 
 
 __all__ = ["show_layout",
@@ -238,6 +240,25 @@ def make_view_keys(owner, name):
     
     return layout, kb
 
+def make_one_key(layout, row, pos, bindings):
+    ref1 = ref2 = None
+    if layout.ref1:
+        try: 
+            ref1 =  layout.ref1.keybinding_set.get(row=row, pos=pos).char
+        except KeyBinding.DoesNotExist:
+            pass
+        
+    if layout.ref2:
+        try: 
+            ref2 =  layout.ref2.keybinding_set.get(row=row, pos=pos).char
+        except KeyBinding.DoesNotExist:
+            pass
+    
+    key = Key(ref1, ref2)
+    for b in bindings:
+        if b: key[b.mod_level] = presentation(b.char)
+    return key 
+    
 def show_layout(request, owner, name):
     layout, kb = make_view_keys(owner, name)
     font_form = FontForm({"font":layout.font})
@@ -329,6 +350,17 @@ def get_all_levels(layout, row, pos):
     
     return levels
 
+def render_json_response(accepted, template_name, dictionary, request):
+    """
+    Render a template into an HTML, and plant it as "content" in a json response
+    together with an indication whether the request was accepted
+    """
+    html = loader.render_to_string(template_name, dictionary,
+                                   context_instance=RequestContext(request))
+    accepted = True if accepted else False # normalization
+    contents = simplejson.dumps(dict(accepted=accepted, fragment=html))
+    return HttpResponse(contents, mimetype="application/json")
+    
 @transaction.commit_on_success
 def edit_key(request, owner, name, row, pos):
     if request.method=='GET':
@@ -365,13 +397,25 @@ def edit_key(request, owner, name, row, pos):
                     if not created:
                         binding.char = value
                         binding.save()
+                    return binding
                 else:
                     KeyBinding.objects.filter(level__level=lvl, **key_params).delete()
-            map(update_level,[1,2,3,4])
-            return redirect(reverse('show-layout', kwargs={"name": layout.name, "owner": layout.owner}))
+                    return None
+            bindings = map(update_level,[1,2,3,4])
+            if request.is_ajax:
+                key = make_one_key(layout, row, pos, bindings)
+                #edit_url = request.path
+                return render_json_response(True, "key_display.html", {'key':key}, request)
+            else:
+                return redirect(reverse('show-layout', kwargs={"name": layout.name, "owner": layout.owner}))
+
+        # Post invalid form under AJAX
+        if request.is_ajax:
+            return render_json_response(False, "edit_key_fragment.html", locals(), request)
     
-    template_name = "edit_key_fragment.html" if request.is_ajax else "edit_key.html"
-    return render_to_response(template_name, locals(), context_instance=RequestContext(request) )
+    # Get, or post-invalid and not AJAX
+    print "Rendering form to response!"
+    return render_to_response("edit_key_fragment.html", locals(), context_instance=RequestContext(request) )
 
 def clone_layout(request, owner, name):
     user = request.user

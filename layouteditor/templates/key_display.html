@@ -1,0 +1,14 @@
+{% spaceless %}
+       {% for char,style in key.refs.items %}
+          <span class="{{ style }}">{{ char|default:"" }}</span>
+       {% endfor %}
+       {% for level in key.levels1 %}
+          <span class="kbkeylevel{{ forloop.counter }} {{ level.style }}">{{ level|default:""|safe }}</span>
+       {% endfor %}
+       <div class="tooltip">
+       {% for level in key.levels1 %}
+          Level {{ forloop.counter }}: {{ level.hexa }} {{ level.name }}<br>
+       {% endfor %}
+          Click key to edit
+       </div> <!-- tooltip -->
+{% endspaceless %}

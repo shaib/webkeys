@@ -57,21 +57,10 @@
  	<div class="kbrow">
     {% for key in row %}
  	   {% if key.levels %}
- 	   {% url edit-key owner name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
- 	   <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="openKeyEditForm('{{ edit_url }}')">
- 	   {% for char,style in key.refs.items %}
- 	      <span class="{{ style }}">{{ char|default:"" }}</span>
- 	   {% endfor %}
- 	   {% for level in key.levels1 %}
- 	      <span class="kbkeylevel{{ forloop.counter }} {{ level.style }}">{{ level|default:""|safe }}</span>
- 	   {% endfor %}
- 	   <div class="tooltip">
- 	   {% for level in key.levels1 %}
- 	      Level {{ forloop.counter }}: {{ level.hexa }} {{ level.name }}<br>
- 	   {% endfor %}
- 	      Click key to edit
- 	   </div> <!-- tooltip -->
- 	   </div> <!-- kbkey -->
+       {% url edit-key owner name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
+       <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="openKeyEditForm('{{ edit_url }}')">
+       {% include "key_display.html" %} {# key #}
+       </div> <!-- kbkey -->
  	   {% else %}
  	   <span class="kbbasekey kbfunckey" style="width: {{ key.style_width }};">
  	     <span></span>
@@ -137,18 +126,39 @@
 	        xhr.post({
 	            form: form,
 	            timeout: 3000,
+	            handleAs: "json",
 	            error: function(message) { alert("Edit failed!!!\n"+message); },
-	            load: function(page) {
-	            	// If the page returned is the form...
-	            	if (page.search('<label for='+'"id_level1">')>=0) // TODO: breaking the string so isn't found in this source... cleaner: Remove js to separate file. 
-	                   form.parentNode.innerHTML = page;
-	                else
-	                   window.location.href = window.location.href; // TODO: Find a nicer way to reload? Update character only?
+	            load: function(data) {
+	            	if (data['accepted']) {
+	            		// Form was ok; close dialog and change key on keyboard
+	            	  key_row = parseInt(dojo.byId('id_row').value);
+                      key_pos = parseInt(dojo.byId('id_pos').value);
+                      alert("Going for "+key_row+", "+key_pos);
+                      row = dojo.query('.keyboard .kbrow')[key_row];
+                      key = dojo.query('.kbbasekey', row)[key_pos];
+                      dijit.byId('edit_key_dialog').hide();
+                      fadeNewContentIn(key, data['fragment'])
+                      //window.location.href = window.location.href; // TODO: Find a nicer way to reload? Update character only?
+	            	}
+                    else
+	                   form.parentNode.innerHTML = data['fragment'];
 	            }
 	        })
 	    })
 	}
-
+    function fadeNewContentIn(node, content) {
+        require(["dojo/_base/fx"], function(fx, dom){
+            fx.fadeOut({
+                node: node,
+                onEnd: function(){
+                    node.innerHTML = content
+                    dojo.fadeIn({
+                        node: node
+                    }).play()
+                }
+            }).play();
+        });
+    }
 
     function setCookieChecked()
     {
