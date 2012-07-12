@@ -42,13 +42,6 @@
    </button>
    </td>
    </tr>
-   <tr>
-   	<td colspan="2">
-    <form method="post" action="{% url set-layout-font name %}">{% csrf_token %}
-      {{ font_form.as_p }}
-    </form>
-    <td colspan="2">
-   </tr>
    </table>
  </div>
  <div class="keyboard">
@@ -133,7 +126,7 @@
 	            		// Form was ok; close dialog and change key on keyboard
 	            	  key_row = parseInt(dojo.byId('id_row').value);
                       key_pos = parseInt(dojo.byId('id_pos').value);
-                      alert("Going for "+key_row+", "+key_pos);
+                      //alert("Going for "+key_row+", "+key_pos);
                       row = dojo.query('.keyboard .kbrow')[key_row];
                       key = dojo.query('.kbbasekey', row)[key_pos];
                       dijit.byId('edit_key_dialog').hide();

@@ -1,0 +1,49 @@
+<style type="text/css">
+	@font-face {  
+	  font-family: TaameyAshkenaz;  
+	  src: url("/static/css/TaameyAshkenaz-Medium.ttf");  
+	  font-weight: normal;  
+	}  
+	@font-face {  
+	  font-family: TaameyAshkenaz;  
+	  src: url("/static/css/TaameyAshkenaz-Bold.ttf");
+	  font-weight: bold;  
+	}  
+ .kbdecoration { font-weight: bold; color: red; }
+ .kbdecoration span { font-weight: normal; color: black; opacity: 0.25; }
+ .kbkey {
+ 	display: inline; 
+ 	font-family: TaameyAshkenaz, ezra sil, arial, sans serif; 
+ }
+ .kbdecoration { font-family: TaameyAshkenaz, ezra sil, arial, sans serif; }
+ .kbsymbols { color: blue; }
+ .control { white-space: nowrap; }
+ .control table { width: inherit; }
+ .control td, .control th { padding-top: 0; padding-bottom: 0; padding-left: 0; border-top-width: 0; }
+ .control th { margin-right: 1ex; }
+ .control label { float: none; text-align: inherit; width: inherit; } 
+ .kbrow {
+ 	display: inline; 
+ 	letter-spacing: 0; word-spacing: 0; white-space: nowrap; 
+ }
+ th {
+ 	text-align: right;
+ }
+ 
+ #user_or_login {
+ 	position: fixed; 
+ 	top: 0;
+ 	width: 960px;
+ 	background: grey;
+ 	color: white;
+ }
+ #user_or_login > * {
+ 	float: right;
+ }
+ 	
+ .signout-link { color: white; background: red; text-decoration: none; }
+ 
+ .error { color: red; background: yellow; }
+
+  body { font-size: 90%; /*padding-top: 2ex;*/ } 
+</style>

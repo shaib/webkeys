@@ -45,7 +45,6 @@ App
 * Export/Import (save layout as local file that can be restored)
 * I18n, specifically Hebrew
 * Undo
-* Include webfont
 * Xkb features:
   + Level 3 selection
   + 6-level key type (for crazy caps and shift-caps behavior)
