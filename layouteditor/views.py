@@ -3,7 +3,8 @@ from unicodedata import category, name as char_name
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.db import transaction
-from django.http import Http404, HttpResponseBadRequest, HttpResponse
+from django.http import Http404, HttpResponseBadRequest, HttpResponse,\
+    HttpResponseForbidden
 from django.template import loader
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
@@ -17,10 +18,11 @@ import keymaps as km
 import caps_options_utils as caps
 import caps_options # just to load the options;  @UnusedImport
 from django.utils import simplejson
+from django.contrib.auth.decorators import login_required
 
 
-__all__ = ["show_layout",
-           "set_layout_font", "edit_key",
+__all__ = ["show_layout", "edit_key",
+           #"set_layout_font",
            "clone_layout",
            "gen_xkb", "gen_klc", "gen_map"
 ]
@@ -260,12 +262,15 @@ def make_one_key(layout, row, pos, bindings):
     return key 
     
 def show_layout(request, owner, name):
-    layout, kb = make_view_keys(owner, name)
-    font_form = FontForm({"font":layout.font})
-    return render_to_response("keyboard.html", 
-                              {'key_rows':kb, 'name':name, 'owner': owner, 
-                               'font': layout.font, 'font_form':font_form,
-                               'caps_choices': caps.choices()},
+    _, kb = make_view_keys(owner, name)
+    params = {'key_rows':kb, 'name':name, 'owner': owner,
+              'caps_choices': caps.choices()
+              } 
+    user = request.user
+    params['can_edit'] = can_edit_for(user, owner)
+    if user.is_authenticated():
+        params['default_clone_name'] = get_default_clone_name(user, name)
+    return render_to_response("keyboard.html", params, 
                               context_instance=RequestContext(request))
 
 def gen_xkb(request, owner, name):
@@ -361,8 +366,11 @@ def render_json_response(accepted, template_name, dictionary, request):
     contents = simplejson.dumps(dict(accepted=accepted, fragment=html))
     return HttpResponse(contents, mimetype="application/json")
     
+@login_required
 @transaction.commit_on_success
 def edit_key(request, owner, name, row, pos):
+    if not can_edit_for(request.user, owner):
+        return HttpResponseForbidden()
     if request.method=='GET':
         # Show the existing key bindings
         layout = get_object_or_404(Layout, owner__username=owner, name=name)
@@ -435,13 +443,28 @@ def clone_layout(request, owner, name):
             messages.add_message(request, messages.ERROR, e)
         return redirect(reverse('layouts'))
     
-def set_layout_font(request, name):
-    if request.method!='POST':
-        return HttpResponseBadRequest()
-    form = FontForm(request.POST)
-    if form.is_valid():
-        layout = get_object_or_404(Layout, name=name)
-        layout.font = form.cleaned_data['font']
-        layout.save()
-        return redirect(reverse('show-layout', kwargs={"name": name}))
+#def set_layout_font(request, name):
+#    if request.method!='POST':
+#        return HttpResponseBadRequest()
+#    form = FontForm(request.POST)
+#    if form.is_valid():
+#        layout = get_object_or_404(Layout, name=name)
+#        layout.font = form.cleaned_data['font']
+#        layout.save()
+#        return redirect(reverse('show-layout', kwargs={"name": name}))
         
+def can_edit_for(request_user, username):
+    return request_user.is_authenticated and \
+            (request_user.is_staff or request_user.username==username)
+
+def get_default_clone_name(user, name):
+    name_query = Layout.objects.filter(owner=user).values_list('name', flat=True)
+    existing_names = frozenset(name_query)
+    if name not in existing_names:
+        return name
+    suffix = 1
+    while True:
+        default = "%s-%d" % (name,suffix)
+        if default not in existing_names:
+            return default
+        suffix += 1

@@ -9,6 +9,12 @@
        {% for level in key.levels1 %}
           Level {{ forloop.counter }}: {{ level.hexa }} {{ level.name }}<br>
        {% endfor %}
+       {% if can_edit %}
           Click key to edit
+       {% else %}{% if request.user.is_authenticated %}
+          Clone layout to make your changes
+       {% else %}
+          Log in to make your own layout
+       {% endif %}{% endif %}
        </div> <!-- tooltip -->
 {% endspaceless %}

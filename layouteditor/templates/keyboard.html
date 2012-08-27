@@ -50,10 +50,16 @@
  	<div class="kbrow">
     {% for key in row %}
  	   {% if key.levels %}
-       {% url edit-key owner name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
-       <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="openKeyEditForm('{{ edit_url }}')">
-       {% include "key_display.html" %} {# key #}
-       </div> <!-- kbkey -->
+ 	     {% if can_edit %}
+	       {% url edit-key owner name forloop.parentloop.counter0 forloop.counter0 as edit_url %}
+	       <div class="kbbasekey kbkey" style="width: {{ key.style_width }};" onclick="openKeyEditForm('{{ edit_url }}')">
+	       {% include "key_display.html" %} {# key #}
+	       </div> <!-- kbkey -->
+           {% else %}
+           <div class="kbbasekey kbkey" style="width: {{ key.style_width }};">
+           {% include "key_display.html" %} {# key #}
+           </div> <!-- kbkey -->
+         {% endif %}   
  	   {% else %}
  	   <span class="kbbasekey kbfunckey" style="width: {{ key.style_width }};">
  	     <span></span>

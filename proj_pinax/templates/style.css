@@ -1,12 +1,12 @@
 <style type="text/css">
 	@font-face {  
 	  font-family: TaameyAshkenaz;  
-	  src: url("/static/css/TaameyAshkenaz-Medium.ttf");  
+	  src: url("{{ STATIC_URL }}css/TaameyAshkenaz-Medium.ttf");  
 	  font-weight: normal;  
 	}  
 	@font-face {  
 	  font-family: TaameyAshkenaz;  
-	  src: url("/static/css/TaameyAshkenaz-Bold.ttf");
+	  src: url("{{ STATIC_URL }}css/TaameyAshkenaz-Bold.ttf");
 	  font-weight: bold;  
 	}  
  .kbdecoration { font-weight: bold; color: red; }
