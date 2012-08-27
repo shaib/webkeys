@@ -44,9 +44,9 @@ class CloneForm(forms.Form):
         cleaned = super(CloneForm, self).clean()
         given_name = cleaned.get('new_name', None)
         if not given_name:
-            raise ValidationError("You must give your clone a name")
+            raise ValidationError("You must give your clone a valid name. Use alphanumerics and '_' only.")
         if Layout.objects.filter(name=given_name, owner=self.user).exists():
-            raise ValidationError("You already have a layout named %s" % given_name)
+            raise ValidationError("You already have a layout named %s." % given_name)
         return cleaned
     
 class FontForm(forms.Form):

@@ -24,6 +24,14 @@
      level 2 (Shift)
    </button>
    </td>
+   <td>
+    <form method="post" action="{% url clone-layout owner name %}">{% csrf_token %}
+      <button data-dojo-type="dijit.form.Button" type="submit">Clone as</button>
+      {{ clone_form.new_name }}
+      {{ clone_form.errors }}
+      
+    </form>
+</td>
    </tr>
    <tr>
    <th>Show layout: </th>

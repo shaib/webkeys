@@ -269,7 +269,9 @@ def show_layout(request, owner, name):
     user = request.user
     params['can_edit'] = can_edit_for(user, owner)
     if user.is_authenticated():
-        params['default_clone_name'] = get_default_clone_name(user, name)
+        default_clone_name = get_default_clone_name(user, name)        
+        clone_form = CloneForm(user, {'new_name':default_clone_name})
+        params['clone_form'] = clone_form
     return render_to_response("keyboard.html", params, 
                               context_instance=RequestContext(request))
 
@@ -441,7 +443,7 @@ def clone_layout(request, owner, name):
     else:
         for e in form.non_field_errors():
             messages.add_message(request, messages.ERROR, e)
-        return redirect(reverse('layouts'))
+        return redirect(reverse('show-layout', kwargs={"name": name, "owner": owner}))
     
 #def set_layout_font(request, name):
 #    if request.method!='POST':
@@ -460,11 +462,19 @@ def can_edit_for(request_user, username):
 def get_default_clone_name(user, name):
     name_query = Layout.objects.filter(owner=user).values_list('name', flat=True)
     existing_names = frozenset(name_query)
+    try:
+        base, suff = name.rsplit("_",1)
+        suffix = int(suff)
+    except ValueError:
+        suffix = 1
+    else:
+        name = base
+
     if name not in existing_names:
         return name
-    suffix = 1
+        
     while True:
-        default = "%s-%d" % (name,suffix)
+        default = "%s_%d" % (name,suffix)
         if default not in existing_names:
             return default
         suffix += 1
