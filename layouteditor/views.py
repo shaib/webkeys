@@ -325,13 +325,13 @@ def gen_klc(request, owner, name):
         settings.FILE_CHARSET = save_charset
 
 def gen_map(request, owner, name):
-    type = request.GET.get('type', 'undefined')
-    if type=='xkb':
+    file_type = request.GET.get('type', 'undefined')
+    if file_type=='xkb':
         return gen_xkb(request, owner, name)
-    elif type=='klc':
+    elif file_type=='klc':
         return gen_klc(request, owner, name)
     else:
-        raise Http404("Keymap of type '%s' not supported" % type)
+        raise Http404("Keymap of type '%s' not supported" % file_type)
 
    
 def editable(char):
