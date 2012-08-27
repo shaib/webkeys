@@ -35,13 +35,17 @@ to do if and when:
 * Allow making layouts readonly without making them system
 * Export Mac keymaps
 * Tests
+* "Social" features:
+  + Link layout clones to originals
+  + Clone counts and clone lists from originals
+  + Diff from clone to original
+  + Suggestions to original, a-la Pull Request
 
 To do before release
 ====================
 
 App
 -----
-* Only owners can edit layouts
 * Export/Import (save layout as local file that can be restored)
 * I18n, specifically Hebrew
 * Undo
