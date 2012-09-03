@@ -1,0 +1,81 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "What Next?" %}{% endblock %}
+{% block extra_head %}
+  <style>
+  	.prompt { color: blue; }
+  	.code-block { margin-left: 3em;}
+  </style>
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Using XKB symbols files" %}</h1>
+    
+        <p>XKB files produced by this file come in different forms.</p>
+        
+        <dl class="what_next">
+            <h3>Easiest Route: Patch files</h3>
+            <p>
+                Download the patch file and apply it at the root of your xkb configuration.
+                For example, on a Debian system:
+                <div class="code-block"> 
+                <code><span class="prompt">$</span> cd /usr/share/X11/xkb</code> <br>
+                <code><span class="prompt">$</span> patch -p1 &lt; <i>/path/to/downloaded.patch</i></code>
+                </div>
+            </p>
+            <h3>Understand some more: Do it by hand</h3>
+            <dt>Stuff you only need once (per layout name/file)</dt>
+            <dd><ol>
+            	<li>Add a reference to your layout from the <code>.../xkb/symbols/il</code> file, by appending to it lines like:
+            	<div class="code-block">
+            	<code>partial alphanumeric_keys  xkb_symbols "<i>layout_name</i>" {</code><br>
+                <code>&nbsp;&nbsp;include "<i>layout_file_name</i>"</code><br>
+                <code>};</code>
+                </div>
+                With this, you've set basic inclusion of your layout, and you can already use it
+                with commands such as <code>setxkbmap</code>. The next steps will allow you to
+                apply your layout using graphical tools.
+                </li>
+                <li>Go to the folder <code>.../xkb/rules/</code><br>
+                In it, you'll find files named <code>evdev.xml</code>,<code>base.xml</code><br>
+                In each of them, find the definition for <code>lyx</code>, and after it, add a block like:
+                <div class="code-block">
+                <code>&nbsp;&nbsp;&lt;variant></code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;configItem></code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;name><i>layout_name</i>&lt;/name></code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;description><i>layout_description</i>&lt;/description></code><br>
+                <code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/configItem></code><br>
+                <code>&nbsp;&nbsp;&lt;/variant></code><br>
+                </div>
+                </li>
+                <li>Still in <code>.../xkb/rules/</code>, for every <code><i>file</i>.xml</code> file you've
+                changed above, there's also a <code><i>file</i>.lst</code>. In this file, again, find the definition
+                for <code>lyx</code> and add after it a line:
+                <div class="code-block">
+                <code><i>layout_name</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;li: <i>layout_description</i></code><br>
+                </div>
+                </li>
+            </ol></dd>
+            <dt>Now, to update your layout</dt>
+            <dd>
+                Download the layout file and put it in <code>.../xkb/symbols/</code>.
+                The layout will be available through your graphical keyboard configuration tool.
+            </dd>
+        <h3>A word on  caps lock and key types</h3>
+        The layouts produced by this site allow control of the keyboard's behavior when caps lock
+        is on. There are, essentially, three routes to go:
+        <dt>You don't care about caps lock</dt>
+        <dd>Set caps behavior to "none", and forget about it.</dd>
+        <dt>You want caps lock, and have no other use for it</dt>
+        <dd>Choose the "eight-level for caps" option. It is somewhat of a patchy abuse of the XKB definitions,
+        	but it works.</dd>
+        <dt>You want caps lock, and have other uses for it (e.g. to switch layouts)</dt>
+        <dd>Choose the "six-level for caps" option. You will need to apply the 
+        	<a href="{{STATIC_URL}}downloads/types.patch">six-level patch</a>.
+        </dd>
+        </dl>
+            
+{% endblock %}
