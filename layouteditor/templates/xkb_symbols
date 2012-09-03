@@ -28,6 +28,8 @@ xkb_symbols "{{ name }}" {
                  {% endif %}[ {{ key.xkb_chars|join:",	" }}	] }; // {{ key.xkb_comments|join:", " }}
     {% endfor %}
     
+    include "level3(ralt_switch)"
+        
     {% if caps_defined %}
     // Special override for use of Caps Lock with existing EIGHT_LEVEL key type
     // This is for making the deployment of the generated file easy. For distribution,

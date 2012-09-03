@@ -36,6 +36,7 @@ to do if and when:
 * Export Mac keymaps
 * Tests
 * "Social" features:
+
   + Link layout clones to originals
   + Clone counts and clone lists from originals
   + Diff from clone to original
@@ -50,10 +51,12 @@ App
 * I18n, specifically Hebrew
 * Undo
 * Xkb features:
-  + Level 3 selection
+
   + 6-level key type (for crazy caps and shift-caps behavior)
   + Downloadable patch files to ease installation
+
 * KLC features:
+
   + Company name, author, copyright notice etc.
 
 Project
