@@ -20,49 +20,11 @@ layout editing needs. Its specific features include:
 
 The app relies on certain HTML5 and CSS3 features, and likely
 doesn't work at all on IE<9. It was tested (more or less) on
-Firefox 3.5/3.6 and Chrome 9. It uses the Dojo toolkit.
+Firefox 10 and Chrome. It uses the Dojo toolkit.
 
 The app is supported by a Pinax-based project, but is
 intended not to depend on it (i.e. be reusable). If this
 isn't the case, it's a bug.
-
-To do
-=====
-
-This started as an exercise, and this heritage still shows. Things
-to do if and when:
-
-* Allow making layouts readonly without making them system
-* Export Mac keymaps
-* Tests
-* "Social" features:
-
-  + Link layout clones to originals
-  + Clone counts and clone lists from originals
-  + Diff from clone to original
-  + Suggestions to original, a-la Pull Request
-
-To do before release
-====================
-
-App
------
-* Export/Import (save layout as local file that can be restored)
-* I18n, specifically Hebrew
-* Undo
-* Xkb features:
-
-  + 6-level key type (for crazy caps and shift-caps behavior)
-  + Downloadable patch files to ease installation
-
-* KLC features:
-
-  + Company name, author, copyright notice etc.
-
-Project
--------
-* User and layout search
-* Comments on layouts
 
 Installation and use
 ====================
@@ -79,3 +41,61 @@ to the folder containing both ``layouteditor`` and ``proj_pinax``.
 Other than that, pretty standard; the ``pip`` requirements
 file is ``proj_pinax/requirements/project.txt``, as usual
 for Pinax based projects.
+
+Roadmap
+=======
+
+-----------
+Release 0.2
+-----------
+
+App
+-----
+* Undo
+* Xkb features:
+
+  + Downloadable patch files to ease installation
+
+* KLC features:
+
+  + Company name, author, copyright notice etc.
+    
+    - Actually, these fit well in a user profile; we should
+      add a description per layout as well. Whichever of the
+      fields don't have entries for them in the file format,
+      can be pushed in as comments. And then they can all go
+      in xkb as well.
+
+* Pre-installed system layouts (code for generation exists)
+* Links to help from within editor and key-edit dialog
+
+
+Project
+-------
+* User profile page
+* User and layout search
+* Comments on layouts
+* Missing semi-static pages (use-klc, about, ...)
+
+-----------
+Release 0.3
+-----------
+
+* Export/Import (save layout as local file that can be restored)
+* I18n, specifically Hebrew
+
+------
+Future
+------
+
+* Allow making layouts readonly without making them system
+* Export Mac keymaps
+* Tests
+* "Social" features:
+
+  + Link layout clones to originals
+  + Clone counts and clone lists from originals
+  + Diff from clone to original
+  + Suggestions to original, a-la Pull Request
+
+

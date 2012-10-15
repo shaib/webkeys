@@ -115,6 +115,23 @@
   	  <label for="mirroring_off">no</label>
 	</input>
 	</td>
+    </tr><tr id="xkb_caps_key_type">
+    <th>Type of keys for caps:</th>
+    <td class="option">
+      <input type="radio" data-dojo-type="dijit.form.RadioButton" name="caps_key_type" value="EIGHT_LEVEL" id="caps_key_type_8" checked="checked" />
+      <label for="caps_key_type_8">eight-level</label>
+      <div class="tooltip">
+        Simpler installation, limits use of Caps key.<br>
+        See <a href="{% url use_xkb %}">Using xkb configuration files</a>
+      </div>
+    </td><td class="option">
+      <input type="radio" data-dojo-type="dijit.form.RadioButton" name="caps_key_type" value="SIX_LEVEL" id="caps_key_type_6" />
+      <label for="caps_key_type_6">six-level</label>
+      <div class="tooltip">
+        Slightly more complex installation.<br>
+        See <a href="{% url use_xkb %}">Using xkb configuration files</a>
+      </div>
+    </td>
 	</tr><tr><th></th><td colspan="2">
       <button data-dojo-type="dijit.form.Button" type="submit">Generate layout file</button>
    	</td></tr>
@@ -238,6 +255,44 @@
     	dojo.connect(item,"onmouseover",showTooltip)
     	dojo.connect(item,"onmouseout",hideTooltip)
     }
+    function setSpecificOptionsVisibility()
+    {
+    	var to_hide = [], to_show = []
+        require(["dojo/dom-style","dojo/fx"], function(domStyle, fx) {
+           var xkb_caps_key_type_style = domStyle.get('xkb_caps_key_type', 'display')
+    	   var xkb_caps_key_type_shown = domStyle.get('xkb_caps_key_type', 'display') != 'none'
+    	   var xkb_caps_key_type_show  = dijit.byId('type_xkb').checked &&
+    	                                 dojo.query('input:not(#caps_opt_Default)[type="radio"][name="caps_option"]:checked').length
+    	   if (xkb_caps_key_type_shown != xkb_caps_key_type_show) {
+    	   	   if (xkb_caps_key_type_show)
+    	   	     to_show.push(dojo.byId('xkb_caps_key_type'))
+    	       else
+                 to_hide.push(dojo.byId('xkb_caps_key_type'))
+    	   }
+    	   if (to_hide.length && to_show.length) {
+               fx.wipeOut({
+	                node: to_hide[0],
+	                onEnd: function(){
+	                	to_show.map(function(nd) {
+ 	                      fx.wipeIn({ node: nd }).play();
+	                    })}
+	           }).play();
+	           for (var i=1; i<to_hide.length; i++) {
+	           	  fx.wipeOut({node: to_hide[i]}).play();
+	           }
+    	   }
+    	   else if (to_hide.length) {
+		        to_hide.map(function(nd) {
+		          fx.wipeOut({ node: nd }).play();
+		        })    	   	
+    	   }
+           else if (to_show.length) {
+                to_show.map(function(nd) {
+                  fx.wipeIn({ node: nd }).play();
+                })          
+           }
+    	});
+    }
     require(["dojo/parser",
              "dojo/ready",
              "dijit/registry",
@@ -269,10 +324,12 @@
 		          dojo.connect(item, "onchange", clearRadioCookies)
 		          dojo.connect(item, "onchange", setCookieChecked)
 		        })
-		        dojo.query('input[type="radio"]').forEach(function(item) {
-		          dojo.connect(item, "onchange", clearRadioCookies)
-		          dojo.connect(item, "onchange", setCookieChecked)
-		        })
+                dojo.query('input[type="radio"][name="type"]').forEach(function(item) {
+                  dojo.connect(item, "onchange", setSpecificOptionsVisibility)
+                })
+                dojo.query('input[type="radio"][name="caps_option"]').forEach(function(item) {
+                  dojo.connect(item, "onchange", setSpecificOptionsVisibility)
+                })
 		        dojo.query('input[type="radio"]').forEach(radioFromCookie)
                 })
         }

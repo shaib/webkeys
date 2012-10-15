@@ -68,13 +68,14 @@
         The layouts produced by this site allow control of the keyboard's behavior when caps lock
         is on. There are, essentially, three routes to go:
         <dt>You don't care about caps lock</dt>
-        <dd>Set caps behavior to "none", and forget about it.</dd>
+        <dd>Set caps behavior to "Default", and forget about it.</dd>
         <dt>You want caps lock, and have no other use for it</dt>
-        <dd>Choose the "eight-level for caps" option. It is somewhat of a patchy abuse of the XKB definitions,
+        <dd>After you select the caps behavior, set "key type for caps" to "eight-level". 
+        	It is somewhat of a patchy abuse of the XKB definitions, turning caps lock into a level-5 lock,
         	but it works.</dd>
-        <dt>You want caps lock, and have other uses for it (e.g. to switch layouts)</dt>
-        <dd>Choose the "six-level for caps" option. You will need to apply the 
-        	<a href="{{STATIC_URL}}downloads/types.patch">six-level patch</a>.
+        <dt>You want caps lock, and have other uses for it (e.g. alt-caps to switch layouts)</dt>
+        <dd>After you select the caps behavior, set "key type for caps" to "six-level".
+        	You will need to apply the <a href="{{STATIC_URL}}downloads/types.patch">six-level patch</a>.
         </dd>
         </dl>
             
