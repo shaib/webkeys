@@ -280,6 +280,9 @@ def gen_xkb(request, owner, name):
     group_name = request.GET.get('group_name', name)
     mirrored = request.GET.get('mirrored', False)
     caps_func = caps.get(request.GET.get('caps_option', None))
+    caps_key_type = request.GET.get('caps_key_type', caps.EIGHT_LEVEL)
+    if caps_key_type not in caps.CAPS_KEY_TYPES:
+        raise Http404("Unrecognized key type requested")
     kb = [[k for k in row if isinstance(k, Key)] for row in kb]
     for row in kb:        
         for key in row:
@@ -292,7 +295,8 @@ def gen_xkb(request, owner, name):
                                     'group_name': group_name,
                                     'mirrored': mirrored,
                                     'mirror_comment': km.XKB_MIRROR_COMMENT if mirrored else "",
-                                    'caps_defined': any(k.caps_keys for k in row for row in kb) 
+                                    'caps_defined': any(k.caps_keys for k in row for row in kb),
+                                    'caps_key_type': caps_key_type, 
                                   }, 
                                   context_instance=RequestContext(request),
                                   mimetype="text/plain")

@@ -7,6 +7,12 @@ Created on Jul 25, 2011
 @author: shai
 '''
 
+# Key types for supporting caps lock behaviors
+
+EIGHT_LEVEL = 'EIGHT_LEVEL'
+SIX_LEVEL = 'SIX_LEVEL'
+CAPS_KEY_TYPES = frozenset([EIGHT_LEVEL, SIX_LEVEL])
+
 options = {}
 
 def caps_option(name):
