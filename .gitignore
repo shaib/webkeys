@@ -1,1 +1,3 @@
 *.pyc
+collected_static
+*.db
