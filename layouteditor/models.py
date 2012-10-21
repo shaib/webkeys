@@ -68,3 +68,53 @@ class KeyBinding(models.Model):
     def clone(self, level):
         "Create a copy of me under a new level"
         return KeyBinding.objects.create(level=level, row=self.row, pos=self.pos, char=self.char)
+
+class KeyChangeManager(models.Manager):
+
+    def to_undo(self, layout):
+        try:
+            return self.filter(layout=layout, done=True).latest()
+        except KeyChange.DoesNotExist:
+            return None
+    
+    def to_redo(self, layout):
+        try:
+            return self.filter(layout=layout, done=False).order_by('when')[0]
+        except IndexError:
+            return None
+
+    def clear_redo_stack(self, layout):
+        return self.filter(layout=layout, done=False).delete()
+    
+class KeyChange(models.Model):
+
+    # Note: This differs from the above model, saving all 4 levels
+    #       for one key in one string.
+    #       This is far more efficient, a little less general, and probably
+    #       the right way to go forward in this app.
+
+    NULL = chr(0)
+    EMPTY = 4*NULL
+
+    layout = models.ForeignKey(Layout)
+    row = models.PositiveIntegerField()
+    pos = models.PositiveIntegerField()
+    before = models.CharField(max_length=4)
+    after = models.CharField(max_length=4)
+    done = models.BooleanField(default=True)
+    when = models.DateTimeField(auto_now_add=True)
+    
+    objects = KeyChangeManager()
+    
+    class Meta:
+        get_latest_by = 'when'
+        
+    def __init__(self, *args, **kw):
+        kw.setdefault('before', KeyChange.EMPTY)
+        kw.setdefault('after', KeyChange.EMPTY)
+        super(KeyChange, self).__init__(*args, **kw)
+
+    def set_before(self, lvl, char):
+        self.before = self.before[:lvl-1]+char+self.before[lvl:]
+    def set_after(self, lvl, char):
+        self.after = self.after[:lvl-1]+char+self.after[lvl:]        

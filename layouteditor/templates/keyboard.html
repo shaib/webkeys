@@ -24,7 +24,7 @@
      level 2 (Shift)
    </button>
    </td>
-   <td>
+   <td style="text-align: right">
    	{% if request.user.is_authenticated %}
     <form method="post" action="{% url clone-layout owner name %}">{% csrf_token %}
       <button data-dojo-type="dijit.form.Button" type="submit">Clone as</button>
@@ -50,6 +50,16 @@
    <button data-dojo-type="dijit.form.ToggleButton" checked iconClass="dijitCheckBoxIcon" id="show4">
      level 4 (AltGr+Shift)
    </button>
+   </td>
+   <td style="text-align: right">
+    {% if can_edit %}
+    <form class="btnform" method="post" action="{% url undo-edit-key owner name %}">{% csrf_token %}
+      <button data-dojo-type="dijit.form.Button" type="submit">Undo</button>      
+    </form>
+    <form class="btnform" method="post" action="{% url redo-edit-key owner name %}">{% csrf_token %}
+      <button data-dojo-type="dijit.form.Button" type="submit">Redo</button>      
+    </form>
+    {% endif %}
    </td>
    </tr>
    </table>

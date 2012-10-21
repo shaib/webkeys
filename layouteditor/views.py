@@ -3,6 +3,8 @@ from unicodedata import category, name as char_name
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.db import transaction
+from idios import django
+from django.core.exceptions import SuspiciousOperation
 from django.http import Http404, HttpResponseBadRequest, HttpResponse,\
     HttpResponseForbidden
 from django.template import loader
@@ -12,21 +14,23 @@ from django.conf import settings
 #from django.utils.html import escape as html_escape
 
 from django.contrib import messages
-from models import KeyBinding, Layout, Level
+from models import KeyBinding, Layout, Level, KeyChange
 from forms import KeyForm, CloneForm
 import keymaps as km
 import caps_options_utils as caps
 import caps_options # just to load the options;  @UnusedImport
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
+from south.exceptions import InconsistentMigrationHistory
 
 
-__all__ = ["show_layout", "edit_key",
-           "clone_layout",
+__all__ = ["show_layout", "clone_layout",
+           "edit_key", "undo_edit", "redo_edit",
            "gen_xkb", "gen_klc", "gen_map"
 ]
                                
-
+class InconsistentUndo(SuspiciousOperation):
+    pass
 
 NBSP = u"&nbsp;"
 ERASE_LEFT = u"&#x232B;"
@@ -398,42 +402,105 @@ def edit_key(request, owner, name, row, pos):
             row=form.cleaned_data['row']
             pos=form.cleaned_data['pos']
             layout=form.cleaned_data['layout']
+            change = KeyChange(layout=layout, row=row, pos=pos)
             key_params = dict(level__layout=layout, row=row, pos=pos)
             def update_level(lvl):
                 value = form.cleaned_data['level%d' % lvl]
                 if value:
+                    change.set_after(lvl, value)
                     level,created = Level.objects.get_or_create(layout=layout, level=lvl)
                     binding,created = KeyBinding.objects. \
                                       get_or_create(defaults={'char': value, 'level':level},
                                                     level__level=lvl, **key_params)
                     if not created:
+                        change.set_before(lvl, binding.char)
                         binding.char = value
                         binding.save()
                     return binding
                 else:
-                    KeyBinding.objects.filter(level__level=lvl, **key_params).delete()
+                    try: 
+                        binding = KeyBinding.objects.get(level__level=lvl, **key_params)
+                        change.set_before(lvl, binding.char)
+                        binding.delete()
+                    except KeyBinding.DoesNotExist:
+                        # Nothing deleted, no change done
+                        pass
                     return None
             bindings = map(update_level,[1,2,3,4])
-            if request.is_ajax:
+            if change.before!=change.after:
+                change.save()
+                KeyChange.objects.clear_redo_stack(layout)
+            if request.is_ajax():
                 key = make_one_key(layout, row, pos, bindings)
-                #edit_url = request.path
                 return render_json_response(True, "key_display.html", {'key':key}, request)
             else:
                 return redirect(reverse('show-layout', kwargs={"name": layout.name, "owner": layout.owner}))
 
         # Post invalid form under AJAX
-        if request.is_ajax:
+        if request.is_ajax():
             return render_json_response(False, "edit_key_fragment.html", locals(), request)
     
     # Get, or post-invalid and not AJAX
     print "Rendering form to response!"
     return render_to_response("edit_key_fragment.html", locals(), context_instance=RequestContext(request) )
 
+@login_required
+@transaction.commit_on_success()
+def undo_redo_edit(request, owner, name, redo):
+    if not can_edit_for(request.user, owner):
+        return HttpResponseForbidden()
+    if request.method!='POST':
+        return HttpResponseBadRequest()
+    
+    layout = get_object_or_404(Layout, owner__username=owner, name=name)
+    change = KeyChange.objects.to_undo(layout) if not redo else KeyChange.objects.to_redo(layout) 
+    bindings = set()
+    if change:
+        for lvl,before,after in zip([1,2,3,4], change.before, change.after):
+            level = Level.objects.get(layout=layout, level=lvl) # TODO: factor this out to 1 query, not 4
+            params = dict(level=level, row=change.row, pos=change.pos)
+            if before!=after:
+                if redo:
+                    before,after = after,before
+                
+                if before==KeyChange.NULL:
+                    if KeyBinding.objects.filter(**params).count()!=1:
+                        raise InconsistentUndo
+                    KeyBinding.objects.filter(**params).delete()
+                else:
+                    binding,created = KeyBinding.objects.get_or_create(defaults={'char': before, 'level':level},
+                                                                       **params)
+                    if after != (KeyChange.NULL if created else binding.char):
+                        raise InconsistentUndo                    
+                    if not created:
+                        binding.char = before
+                        binding.save()
+                    bindings.add(binding)
+            else:
+                bindings.add(KeyBinding(level=level, char=before))
+        change.done = redo
+        change.save()
+        
+        if request.is_ajax():
+            key = make_one_key(layout, change.row, change.pos, bindings)
+            return render_json_response(True, "key_display.html", {'key':key}, request)
+        else:
+            return redirect(reverse('show-layout', kwargs={"name": layout.name, "owner": layout.owner}))
+    else:
+        # TODO: Better handling?
+        raise Http404()
+
+def undo_edit(request, owner, name):
+    return undo_redo_edit(request, owner, name, False)
+
+def redo_edit(request, owner, name):
+    return undo_redo_edit(request, owner, name, True)
+    
 def clone_layout(request, owner, name):
     user = request.user
     if not user.is_authenticated():
         messages.add_message(request, messages.ERROR, "You need to be logged in to create a layout")
-        return redirect(reverse('layouts'))
+        return redirect(reverse('layouts'))# FIXME: No such url anymore
     if request.method!='POST':
         return HttpResponseBadRequest()
     form = CloneForm(user, request.POST)
