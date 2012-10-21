@@ -265,16 +265,19 @@ def make_one_key(layout, row, pos, bindings):
     return key 
     
 def show_layout(request, owner, name):
-    _, kb = make_view_keys(owner, name)
+    layout, kb = make_view_keys(owner, name)
     params = {'key_rows':kb, 'name':name, 'owner': owner,
               'caps_choices': caps.choices()
               } 
     user = request.user
-    params['can_edit'] = can_edit_for(user, owner)
+    can_edit = params['can_edit'] = can_edit_for(user, owner)
     if user.is_authenticated():
         default_clone_name = get_default_clone_name(user, name)        
         clone_form = CloneForm(user, {'new_name':default_clone_name})
         params['clone_form'] = clone_form
+    if can_edit:
+        params['undo'] = KeyChange.objects.to_undo(layout)
+        params['redo'] = KeyChange.objects.to_redo(layout)
     return render_to_response("keyboard.html", params, 
                               context_instance=RequestContext(request))
 

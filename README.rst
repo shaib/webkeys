@@ -51,7 +51,6 @@ Release 0.2
 
 App
 -----
-* Undo
 * Xkb features:
 
   + Downloadable patch files to ease installation
@@ -66,7 +65,6 @@ App
       can be pushed in as comments. And then they can all go
       in xkb as well.
 
-* Pre-installed system layouts (code for generation exists)
 * Links to help from within editor and key-edit dialog
 
 

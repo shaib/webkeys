@@ -54,10 +54,10 @@
    <td style="text-align: right">
     {% if can_edit %}
     <form class="btnform" method="post" action="{% url undo-edit-key owner name %}">{% csrf_token %}
-      <button data-dojo-type="dijit.form.Button" type="submit">Undo</button>      
+      <button id="undo-edit" data-dojo-type="dijit.form.Button" type="submit" {% if not undo %}disabled{% endif %}>Undo</button>      
     </form>
     <form class="btnform" method="post" action="{% url redo-edit-key owner name %}">{% csrf_token %}
-      <button data-dojo-type="dijit.form.Button" type="submit">Redo</button>      
+      <button id="redo-edit" data-dojo-type="dijit.form.Button" type="submit"{% if not redo %}disabled{% endif %}>Redo</button>      
     </form>
     {% endif %}
    </td>
@@ -166,13 +166,15 @@
 	            error: function(message) { alert("Edit failed!!!\n"+message); },
 	            load: function(data) {
 	            	if (data['accepted']) {
-	            		// Form was ok; close dialog and change key on keyboard
+	            		// Form was ok; close dialog, update undo/redo buttons, change key on keyboard
 	            	  key_row = parseInt(dojo.byId('id_row').value);
                       key_pos = parseInt(dojo.byId('id_pos').value);
                       //alert("Going for "+key_row+", "+key_pos);
                       row = dojo.query('.keyboard .kbrow')[key_row];
                       key = dojo.query('.kbbasekey', row)[key_pos];
                       dijit.byId('edit_key_dialog').hide();
+                      dijit.byId('undo-edit').setAttribute('disabled', false);
+                      dijit.byId('redo-edit').setAttribute('disabled', true);
                       fadeNewContentIn(key, data['fragment'])
                       //window.location.href = window.location.href; // TODO: Find a nicer way to reload? Update character only?
 	            	}
