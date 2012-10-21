@@ -13,7 +13,7 @@ from django.conf import settings
 
 from django.contrib import messages
 from models import KeyBinding, Layout, Level
-from forms import KeyForm, CloneForm, FontForm
+from forms import KeyForm, CloneForm
 import keymaps as km
 import caps_options_utils as caps
 import caps_options # just to load the options;  @UnusedImport
@@ -22,7 +22,6 @@ from django.contrib.auth.decorators import login_required
 
 
 __all__ = ["show_layout", "edit_key",
-           #"set_layout_font",
            "clone_layout",
            "gen_xkb", "gen_klc", "gen_map"
 ]
@@ -380,7 +379,6 @@ def edit_key(request, owner, name, row, pos):
     if request.method=='GET':
         # Show the existing key bindings
         layout = get_object_or_404(Layout, owner__username=owner, name=name)
-        font = layout.font
         row = int(row)
         pos = int(pos)
         levels = get_all_levels(layout, row, pos)
@@ -448,17 +446,7 @@ def clone_layout(request, owner, name):
         for e in form.non_field_errors():
             messages.add_message(request, messages.ERROR, e)
         return redirect(reverse('show-layout', kwargs={"name": name, "owner": owner}))
-    
-#def set_layout_font(request, name):
-#    if request.method!='POST':
-#        return HttpResponseBadRequest()
-#    form = FontForm(request.POST)
-#    if form.is_valid():
-#        layout = get_object_or_404(Layout, name=name)
-#        layout.font = form.cleaned_data['font']
-#        layout.save()
-#        return redirect(reverse('show-layout', kwargs={"name": name}))
-        
+            
 def can_edit_for(request_user, username):
     return request_user.is_authenticated and \
             (request_user.is_staff or request_user.username==username)

@@ -8,7 +8,6 @@ class Layout(models.Model):
     name = models.CharField(max_length=64)
     ref1 = models.ForeignKey("Level", null=True, related_name='ref1_using_layouts')
     ref2 = models.ForeignKey("Level", null=True, related_name='ref2_using_layouts')
-    font = models.CharField(max_length=80, null=True, blank=True, default="verdana, ezra sil")
     
     class Meta:
         unique_together = (("owner", "name"),)
@@ -24,8 +23,7 @@ class Layout(models.Model):
     def clone(self, owner, name):
         "Create a copy of me with a new name"
         clon = Layout.objects.create(owner=owner, name=name,
-                                     ref1=self.ref1, ref2=self.ref2,
-                                     font=self.font)
+                                     ref1=self.ref1, ref2=self.ref2)
         for level in self.level_set.all():
             level.clone(clon)
         return clon

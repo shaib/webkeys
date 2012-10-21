@@ -48,6 +48,3 @@ class CloneForm(forms.Form):
         if Layout.objects.filter(name=given_name, owner=self.user).exists():
             raise ValidationError("You already have a layout named %s." % given_name)
         return cleaned
-    
-class FontForm(forms.Form):
-    font = forms.CharField(max_length=80, required=False)
