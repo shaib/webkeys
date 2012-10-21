@@ -331,7 +331,8 @@
                   dojo.connect(item, "onchange", setSpecificOptionsVisibility)
                 })
 		        dojo.query('input[type="radio"]').forEach(radioFromCookie)
-                })
+                setSpecificOptionsVisibility()
+            })
         }
     )
  </script>
