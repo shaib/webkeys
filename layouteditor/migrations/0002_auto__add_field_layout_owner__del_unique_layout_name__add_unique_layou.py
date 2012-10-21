@@ -9,13 +9,13 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Use the first staff user as owner for existing layouts
-        def_owner = orm['auth.User'].objects.filter(is_staff=True).order_by('id')[0]
+        def_owner = orm['auth.User'].objects.filter(is_staff=True).order_by('id')[0].id if not db.dry_run else 1
         
         # Removing unique constraint on 'Layout', fields ['name']
         db.delete_unique('layouteditor_layout', ['name'])
 
         # Adding field 'Layout.owner'
-        db.add_column('layouteditor_layout', 'owner', self.gf('django.db.models.fields.related.ForeignKey')(default=def_owner.id, to=orm['auth.User']), keep_default=False)
+        db.add_column('layouteditor_layout', 'owner', self.gf('django.db.models.fields.related.ForeignKey')(default=def_owner, to=orm['auth.User']), keep_default=False)
 
         # Adding unique constraint on 'Layout', fields ['owner', 'name']
         db.create_unique('layouteditor_layout', ['owner_id', 'name'])
