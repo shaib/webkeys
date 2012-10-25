@@ -18,6 +18,9 @@
             <dt><a href="{% url profile_detail user.username %}">fill out your profile</a></dt>
             <dd>to tell the world a little about yourself.</dd>
             
+            <dt><a href="{% url home %}">go back to the home page</a></dt>
+            <dd>to find layouts to play with.</dd>
+
             {% ifsetting ACCOUNT_OPEN_SIGNUP %}
             {% else %}
                 {% if user.is_staff %}

@@ -3,5 +3,17 @@
     {% if profile.name %}<p><b>{% trans "Name" %}</b>: {{ profile.name }}</p>{% endif %}
     {% if profile.about %}<p><b>{% trans "About" %}</b>: {{ profile.about }}</p>{% endif %}
     {% if profile.location %}<p><b>{% trans "Location" %}</b>: {{ profile.location }}</p>{% endif %}
-    {% if profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ profile.website }}">{{ profile.website }}</a></p>{% endif %}
+    {% if profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ profile.website }}" rel="nofollow">{{ profile.website }}</a></p>{% endif %}
+    {% with profile.user.layout_set.all as layouts %} {# TODO: FIXME: take query out of template #}
+	    {% if layouts %}
+	       <h3>{% trans "Layouts:" %}</h3>
+	        <dl>
+		    {% for layout in layouts %} 
+		        <dt><a href="{{ layout.get_absolute_url }}">{{ layout.name }}</a></dt>
+		    {% endfor %}
+		    </dl>
+	    {% else %}
+	        <h5>{% trans "No Owned Layouts" %}</h5>
+	    {% endif %}
+    {% endwith %}
 </div>
