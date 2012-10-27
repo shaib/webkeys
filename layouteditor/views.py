@@ -154,7 +154,8 @@ class Key(BaseKey):
     
     def klc_annotate(self, row, pos):
         self.sc = km.klc_sc(row, pos)
-        self.vk = km.klc_vk(self.ref1)        
+        self.vk = km.klc_vk(self.ref1)
+        if self.caps_keys: self.caps_keys = list(self.caps_keys)        
         self.cap = km.klc_cap(bool(self.caps_keys))
         levels = self.levels
         if len(levels)<5:
@@ -286,7 +287,7 @@ def gen_xkb(request, owner, name):
     group_name = request.GET.get('group_name', name)
     mirrored = request.GET.get('mirrored', False)
     caps_func = caps.get(request.GET.get('caps_option', None))
-    caps_key_type = request.GET.get('caps_key_type', caps.EIGHT_LEVEL)
+    caps_key_type = caps_func.key_type or request.GET.get('caps_key_type', caps.EIGHT_LEVEL)
     if caps_key_type not in caps.CAPS_KEY_TYPES:
         raise Http404("Unrecognized key type requested")
     kb = [[k for k in row if isinstance(k, Key)] for row in kb]

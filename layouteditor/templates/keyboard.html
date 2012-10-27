@@ -106,10 +106,10 @@
 	</td>
 	</tr><tr>
 	<th>Caps lock behavior:</th>
-  	{% for name,opt,tooltip in caps_choices %}
+  	{% for name,opt,tooltip,free_caps in caps_choices %}
   	  <td class="option">
   	  <input type="radio" data-dojo-type="dijit.form.RadioButton" name="caps_option" 
-  	   value="{{ name }}" id="caps_opt_{{ opt }}" />
+  	   value="{{ name }}" id="caps_opt_{{ opt }}" data-free-caps="{{ free_caps }}" />
   	  <label for="caps_opt_{{ opt }}">{{ name }}</label>
   	  <div class="tooltip">{{ tooltip|safe }}</div>
 	  </td>
@@ -132,15 +132,16 @@
       <label for="caps_key_type_8">eight-level</label>
       <div class="tooltip">
         Simpler installation, limits use of Caps key.<br>
-        See <a href="{% url use_xkb %}">Using xkb configuration files</a>
       </div>
     </td><td class="option">
       <input type="radio" data-dojo-type="dijit.form.RadioButton" name="caps_key_type" value="SIX_LEVEL" id="caps_key_type_6" />
       <label for="caps_key_type_6">six-level</label>
       <div class="tooltip">
         Slightly more complex installation.<br>
-        See <a href="{% url use_xkb %}">Using xkb configuration files</a>
       </div>
+    </td>
+    <td>
+        See <a href="{% url use_xkb %}">Using xkb configuration files</a>
     </td>
 	</tr><tr><th></th><td colspan="2">
       <button data-dojo-type="dijit.form.Button" type="submit">Generate layout file</button>
@@ -273,8 +274,12 @@
         require(["dojo/dom-style","dojo/fx"], function(domStyle, fx) {
            var xkb_caps_key_type_style = domStyle.get('xkb_caps_key_type', 'display')
     	   var xkb_caps_key_type_shown = domStyle.get('xkb_caps_key_type', 'display') != 'none'
-    	   var xkb_caps_key_type_show  = dijit.byId('type_xkb').checked &&
-    	                                 dojo.query('input:not(#caps_opt_Default)[type="radio"][name="caps_option"]:checked').length
+    	   // Somewhat surprisingly, dijit.byId('type_xkb').checked returns status before the change;
+    	   // the css query returns it after the change.
+    	   var xkb_caps_key_type_show  = dojo.query('#type_xkb:checked').length &&
+    	                                 dojo.query('input:[type="radio"][name="caps_option"]:checked').some(
+    	                                 	function(node) { return dojo.getNodeProp(node, "data-free-caps");}
+    	                                 )
     	   if (xkb_caps_key_type_shown != xkb_caps_key_type_show) {
     	   	   if (xkb_caps_key_type_show)
     	   	     to_show.push(dojo.byId('xkb_caps_key_type'))

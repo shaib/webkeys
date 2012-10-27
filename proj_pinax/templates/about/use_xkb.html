@@ -66,10 +66,14 @@
             </dd>
         <h3>A word on  caps lock and key types</h3>
         The layouts produced by this site allow control of the keyboard's behavior when caps lock
-        is on. There are, essentially, three routes to go:
+        is on. There are four routes to go:
         <dt>You don't care about caps lock</dt>
         <dd>Set caps behavior to "Default", and forget about it.</dd>
-        <dt>You want caps lock, and have no other use for it</dt>
+        <dt>You want simple caps lock behavior</dt>
+        <dd>Select a caps lock behavior which can be supported by the default X11 key types.
+        	At the moment, this is only the "SI1452" option. You will not have to choose
+        	a key-type for caps.</dd>
+        <dt>You want special caps lock behavior, and have no other use for the caps lock key</dt>
         <dd>After you select the caps behavior, set "key type for caps" to "eight-level". 
         	It is somewhat of a patchy abuse of the XKB definitions, turning caps lock into a level-5 lock,
         	but it works.</dd>

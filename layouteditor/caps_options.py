@@ -22,9 +22,9 @@ Created on Jul 5, 2011
 # (no caps) function is named with a capital D to be first. Please keep
 # function names all lower-case to preserve this.
 # 
-import unicodedata as U
-from keymaps import mirror
 from caps_options_utils import caps_option
+from keymaps import mirror
+import unicodedata as U
 
 @caps_option("Latin")
 def latin(key):
@@ -97,3 +97,24 @@ def caps_latin(key):
     # and apply inverse capitalization
     return key.ref_chars[1].upper(), key.ref_chars[2].lower()
     
+class CapsByShift(list):
+    """
+    This is a value to be returned to say that caps should be used,
+    but the actual value should be determined by the key type.
+    It is a list which evaluates to boolean as True even if it is empty.
+    """
+    def __nonzero__(self):
+        return True
+    
+@caps_option("SI1452", key_type="FOUR_LEVEL_ALPHABETIC")
+def SI1452(key,
+           Aleph=u'\u05d0', Tav=u'\u05ea'):
+    """
+    Minimalist caps action
+    Make sure latin capital letters are produced in keys carrying them
+    (additionally, make Hebrew-letter keys go to level 2)
+    """
+    if Aleph<=key.level_chars[1]<=Tav or u'A' <=key.level_chars[2]<=u'Z':
+        return CapsByShift()
+    else:
+        return None

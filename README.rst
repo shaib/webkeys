@@ -54,7 +54,6 @@ App
 * Xkb features:
 
   + Downloadable patch files to ease installation
-  + Caps without crazy using 4-level key-types
 
 * KLC features:
 
