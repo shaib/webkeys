@@ -75,10 +75,10 @@ old_si1452_nikud = {
     u'\\': u'\u05bb', # Qubuts
 }
 
-@caps_option("SI1452")
-def SI1452(key):
+@caps_option("MS Backwards compatible")
+def ms_nikud(key):
     """
-    The SI1452 draft recommendation:
+    Emulate the old Microsoft Windows behavior:
     Unshifted - like a US keyboard with CAPS locked
     Shifted - like level 1, except the top row gets the old-standard nikud
     """
