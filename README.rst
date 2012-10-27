@@ -54,6 +54,7 @@ App
 * Xkb features:
 
   + Downloadable patch files to ease installation
+  + Caps without crazy using 4-level key-types
 
 * KLC features:
 
@@ -72,7 +73,6 @@ Project
 -------
 * User profile page
 * User and layout search
-* Comments on layouts
 * Missing semi-static pages (use-klc, about, ...)
 
 -----------
@@ -81,6 +81,7 @@ Release 0.3
 
 * Export/Import (save layout as local file that can be restored)
 * I18n, specifically Hebrew
+* Comments on layouts
 
 ------
 Future
