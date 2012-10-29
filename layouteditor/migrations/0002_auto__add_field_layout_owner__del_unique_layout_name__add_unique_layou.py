@@ -9,7 +9,15 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Use the first staff user as owner for existing layouts
-        def_owner = orm['auth.User'].objects.filter(is_staff=True).order_by('id')[0].id if not db.dry_run else 1
+        if db.dry_run:
+            def_owner = 1
+        else:
+            try:
+                def_owner = orm['auth.User'].objects.filter(is_staff=True).order_by('id')[0].id
+            except IndexError:
+                from django.contrib.auth.models import User
+                user = User.objects.create_user("system", "invalid@example.com", None)
+                def_owner =  user.id
         
         # Removing unique constraint on 'Layout', fields ['name']
         db.delete_unique('layouteditor_layout', ['name'])
