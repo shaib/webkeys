@@ -283,7 +283,7 @@ def show_layout(request, owner, name):
                               context_instance=RequestContext(request))
 
 def gen_xkb(request, owner, name):
-    _, kb = make_view_keys(owner, name)
+    layout, kb = make_view_keys(owner, name)
     group_name = request.GET.get('group_name', name)
     mirrored = request.GET.get('mirrored', False)
     caps_func = caps.get(request.GET.get('caps_option', None))
@@ -295,7 +295,9 @@ def gen_xkb(request, owner, name):
         for key in row:
             key.mirrored = mirrored
             key.caps_keys = caps_func(key)
-            
+    
+    user_profile = layout.owner_profile()
+     
     response = render_to_response("xkb_symbols", {
                                     'key_rows':kb, 
                                     'name':name,
@@ -303,7 +305,11 @@ def gen_xkb(request, owner, name):
                                     'mirrored': mirrored,
                                     'mirror_comment': km.XKB_MIRROR_COMMENT if mirrored else "",
                                     'caps_defined': any(k.caps_keys for k in row for row in kb),
-                                    'caps_key_type': caps_key_type, 
+                                    'caps_key_type': caps_key_type,
+                                    'description' : layout.description,
+                                    'author' : user_profile.name,
+                                    'affiliation' : user_profile.affiliation,
+                                    'copyright' : layout.copyright,
                                   }, 
                                   context_instance=RequestContext(request),
                                   mimetype="text/plain")
@@ -311,7 +317,7 @@ def gen_xkb(request, owner, name):
     return response
 
 def gen_klc(request, owner, name):
-    _, kb = make_view_keys(owner, name)
+    layout, kb = make_view_keys(owner, name)
     params = {}
     for n in ("localename","localeid","languagename"):
         params[n] = request.GET.get(n, None)
@@ -330,6 +336,12 @@ def gen_klc(request, owner, name):
                        key_rows=kb,
                        mirrored=mirrored,
                        mirror_comment=km.KLC_MIRROR_COMMENT if mirrored else ""))
+    user_profile = layout.owner_profile()
+    params.update({'description' : layout.description,
+                   'author' : user_profile.name,
+                   'affiliation' : user_profile.affiliation,
+                   'copyright' : layout.copyright,
+                   })
     save_charset = settings.FILE_CHARSET
     try:
         settings.FILE_CHARSET = 'utf-16'

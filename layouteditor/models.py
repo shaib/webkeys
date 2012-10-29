@@ -1,13 +1,17 @@
 from django.db import models
 from django.db import transaction
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, SiteProfileNotAvailable
 from django.db.models import permalink
+
+DEFAULT_COPYRIGHT = u"This file is in the public domain" # TODO: Setting?
 
 class Layout(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(max_length=64)
     ref1 = models.ForeignKey("Level", null=True, related_name='ref1_using_layouts')
     ref2 = models.ForeignKey("Level", null=True, related_name='ref2_using_layouts')
+    description = models.TextField(null=True, blank=True)
+    created = models.DateField(auto_now_add=True)
     
     class Meta:
         unique_together = (("owner", "name"),)
@@ -15,6 +19,23 @@ class Layout(models.Model):
     def __unicode__(self):
         return "Layout: " + self.name
     
+    @property
+    def copyright(self):
+        try:
+            renderer = self.owner_profile().copyright
+            start_year = self.created.year
+            last_change = KeyChange.objects.to_undo(self)
+            end_year = last_change and last_change.when.year
+            return renderer(start_year, end_year)
+        except:
+            return DEFAULT_COPYRIGHT
+    
+    def owner_profile(self):
+        try:
+            return self.owner.get_profile()
+        except SiteProfileNotAvailable:
+            return FakeProfile(self.owner)
+                
     @permalink
     def get_absolute_url(self):
         return ("show-layout", (self.owner.username, self.name))
@@ -28,6 +49,14 @@ class Layout(models.Model):
             level.clone(clon)
         return clon
     
+# Not a model -- just a helper for the Layout class 
+class FakeProfile(object):
+    def __init__(self, user):
+        self.name = user.username
+        self.affiliation = None
+    def copyright(self, *args):
+        return DEFAULT_COPYRIGHT
+        
 class Level(models.Model):
     layout = models.ForeignKey(Layout)
     level = models.PositiveIntegerField()
@@ -117,4 +146,5 @@ class KeyChange(models.Model):
     def set_before(self, lvl, char):
         self.before = self.before[:lvl-1]+char+self.before[lvl:]
     def set_after(self, lvl, char):
-        self.after = self.after[:lvl-1]+char+self.after[lvl:]        
+        self.after = self.after[:lvl-1]+char+self.after[lvl:]
+        

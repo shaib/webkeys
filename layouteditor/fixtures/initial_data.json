@@ -6,6 +6,7 @@
       "ref1": 1, 
       "ref2": 2, 
       "name": "qwerty_ref",
+      "created": "2012-01-01",
       "owner" : 1
     }
   }, 
@@ -16,6 +17,7 @@
       "ref1": 1, 
       "ref2": 2, 
       "name": "si1452",
+      "created": "2012-01-01",
       "owner" : 1
     }
   }, 

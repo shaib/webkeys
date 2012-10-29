@@ -42,6 +42,11 @@ Other than that, pretty standard; the ``pip`` requirements
 file is ``proj_pinax/requirements/project.txt``, as usual
 for Pinax based projects.
 
+The ``layouteditor`` app expects that if there is a user profile,
+it supports the properties ``name`` and ``affiliation``, and a method
+``copyright(start_year, end_year)`` returning a copyright notice. 
+A user profile is not mandatory, though.
+
 Roadmap
 =======
 
@@ -55,22 +60,11 @@ App
 
   + Downloadable patch files to ease installation
 
-* KLC features:
-
-  + Company name, author, copyright notice etc.
-    
-    - Actually, these fit well in a user profile; we should
-      add a description per layout as well. Whichever of the
-      fields don't have entries for them in the file format,
-      can be pushed in as comments. And then they can all go
-      in xkb as well.
-
 * Links to help from within editor and key-edit dialog
 
 
 Project
 -------
-* User profile page
 * User and layout search
 * Missing semi-static pages (use-klc, about, ...)
 * Django 1.4 or 1.5
