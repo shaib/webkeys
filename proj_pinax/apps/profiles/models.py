@@ -12,7 +12,7 @@ class Profile(ProfileBase):
     affiliation = models.CharField(_("affiliation"), max_length=50, null=True, blank=True)
     copyright_template = models.CharField(_("copyright template"), max_length=100, null=True, blank=True,
                                           help_text=_("Copyright note to put in your layout files.\n" +
-                                                      "You can use \u00A9 for a copyright sign and %(x)s to include field values.\n"+
+                                                      "You can use %(x)s to include field values.\n"+
                                                       "x can be name, location, website, affiliation, email, year or years.\n"+
                                                       "(year is the last year the layout was saved, years is first--last)."),
                                           default=u'This file is in the public domain.') # \ua9 for copyright
@@ -26,5 +26,5 @@ class Profile(ProfileBase):
         if start_year==end_year:
             args['years'] = args['year'] 
         else:
-            args['years'] = u'%s\u2013%s' %(start_year, end_year)
+            args['years'] = u'%s--%s' %(start_year, end_year)
         return self.copyright_template % args
