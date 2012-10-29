@@ -48,3 +48,25 @@ class CloneForm(forms.Form):
         if Layout.objects.filter(name=given_name, owner=self.user).exists():
             raise ValidationError("You already have a layout named %s." % given_name)
         return cleaned
+
+class LayoutDescriptionForm(forms.Form):
+    
+    description = forms.CharField(widget=forms.Textarea(attrs=dict(
+                cols=70, rows=4,
+                placeholder="Write a description for your layout here",
+                width="100%")))
+    
+    def __init__(self, layout=None, data=None, *args, **kw):
+        if data is None: 
+            data = {}
+        else:
+            data = data.copy()
+        if layout is not None: 
+            self.layout = layout
+            data.setdefault('description',layout.description)
+        super(LayoutDescriptionForm, self).__init__(data, *args, **kw)
+        
+    def save(self, commit=True):
+        self.layout.description = self.cleaned_data['description']
+        if commit: self.layout.save()
+        return self.layout

@@ -9,6 +9,14 @@
 
 {% block body %}
  <h2>Keyboard Layout - {{ name }}</h2>
+ {% if can_edit %}
+    <form id="description_form" method="post" action="{% url change-layout-description owner name %}">{% csrf_token %}
+     <table><tr>
+      <td width="90%">{{ descr_form.description }}</td>
+      <td><button data-dojo-type="dijit.form.Button" type="submit">Update description</button></td>
+     </tr></table>
+    </form>
+ {% endif %}
  <div id="edit_key_dialog" data-dojo-type="dijit.Dialog" title="Edit Key" style="display: none;"></div>
  <div class="control">
    <table>

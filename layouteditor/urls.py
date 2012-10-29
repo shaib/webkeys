@@ -22,11 +22,11 @@ urlpatterns = patterns('',
     url(r'^undo/(?P<owner>\w+)/(?P<name>\w+)/$', undo_edit, name="undo-edit-key"),
     url(r'^redo/(?P<owner>\w+)/(?P<name>\w+)/$', redo_edit, name="redo-edit-key"),
     #url(r'^$', list_detail.object_list, layout_info, name="layouts"),
+    url(r'^descr/(?P<owner>\w+)/(?P<name>\w+)/$', change_description, name="change-layout-description"),
     url(r'^clone/(?P<owner>\w+)/(?P<name>\w+)/$', clone_layout, name="clone-layout"),
     url(r'^genxkb/(?P<owner>\w+)/(?P<name>\w+)/$', gen_xkb, name="gen-xkb"),
     url(r'^genklc/(?P<owner>\w+)/(?P<name>\w+)/$', gen_klc, name="gen-klc"),
     url(r'^genmap/(?P<owner>\w+)/(?P<name>\w+)/$', gen_map, name="gen-map"),
-    
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

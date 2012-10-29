@@ -5,8 +5,7 @@
 // Designed{% if author %} by {{ author }}{% endif %}{% if affiliation %} at {{ affiliation }}{% endif %}
 // (possibly based on the work of others)
 {% endif %}
-{% for desc_line in description.splitlines %}
-// {{ desc_line }}
+{% for desc_line in description.splitlines %}// {{ desc_line }}
 {% endfor %}
 {{ mirror_comment }}
 

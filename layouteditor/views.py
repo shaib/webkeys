@@ -22,9 +22,10 @@ import caps_options # just to load the options;  @UnusedImport
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from south.exceptions import InconsistentMigrationHistory
+from layouteditor.forms import LayoutDescriptionForm
 
 
-__all__ = ["show_layout", "clone_layout",
+__all__ = ["show_layout", "clone_layout", "change_description",
            "edit_key", "undo_edit", "redo_edit",
            "gen_xkb", "gen_klc", "gen_map"
 ]
@@ -279,6 +280,7 @@ def show_layout(request, owner, name):
     if can_edit:
         params['undo'] = KeyChange.objects.to_undo(layout)
         params['redo'] = KeyChange.objects.to_redo(layout)
+        params['descr_form'] = LayoutDescriptionForm(layout)
     return render_to_response("keyboard.html", params, 
                               context_instance=RequestContext(request))
 
@@ -511,7 +513,23 @@ def undo_edit(request, owner, name):
 
 def redo_edit(request, owner, name):
     return undo_redo_edit(request, owner, name, True)
+
+@login_required
+@transaction.commit_on_success()
+def change_description(request, owner, name):    
+    if not can_edit_for(request.user, owner):
+        return HttpResponseForbidden()
+    if request.method!='POST':
+        return HttpResponseBadRequest()
     
+    layout = get_object_or_404(Layout, owner__username=owner, name=name)
+    form = LayoutDescriptionForm(layout, request.POST)
+    if form.is_valid():
+        form.save(commit=True)
+    else:
+        messages.add_message(request, messages.ERROR, "Unexpected error encountered. Description not changed")
+    return redirect(reverse('show-layout', kwargs={"name": name, "owner": owner}))
+            
 def clone_layout(request, owner, name):
     user = request.user
     if not user.is_authenticated():
