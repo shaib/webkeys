@@ -73,6 +73,7 @@ Project
 * User profile page
 * User and layout search
 * Missing semi-static pages (use-klc, about, ...)
+* Django 1.4 or 1.5
 
 -----------
 Release 0.3
@@ -81,6 +82,12 @@ Release 0.3
 * Export/Import (save layout as local file that can be restored)
 * I18n, specifically Hebrew
 * Comments on layouts
+* Support for standard-compliant layouts:
+  + At best, when user selects to make the layout standard,
+    make bindings defined by the standard unchangeable.
+  + At least, add an easy indication whether the layout
+    is standard-compliant
+* Django 1.5 (if not achieved for 0.2)
 
 ------
 Future
