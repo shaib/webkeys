@@ -41,6 +41,7 @@
  .fieldWrapper th { text-align: left; }
  .btnform { display: inline; }
  
- /* for description form */
- #description_form textarea { resize: vertical; width: 100%; }
+ /* for description */
+ #description_form textarea { resize: vertical; width: 100%; font-weight: bold; }
+ .kbdescription * { font-weight: bold; font-style: italic; }
 </style>

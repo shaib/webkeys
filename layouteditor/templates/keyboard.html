@@ -16,6 +16,10 @@
       <td><button data-dojo-type="dijit.form.Button" type="submit">Update description</button></td>
      </tr></table>
     </form>
+ {% else %}
+    <div class="kbdescription">
+    	{{ description|linebreaks }}
+    </div>
  {% endif %}
  <div id="edit_key_dialog" data-dojo-type="dijit.Dialog" title="Edit Key" style="display: none;"></div>
  <div class="control">

@@ -280,6 +280,8 @@ def show_layout(request, owner, name):
         params['undo'] = KeyChange.objects.to_undo(layout)
         params['redo'] = KeyChange.objects.to_redo(layout)
         params['descr_form'] = LayoutDescriptionForm(layout)
+    else:
+        params['description'] = layout.description
     return render_to_response("keyboard.html", params, 
                               context_instance=RequestContext(request))
 
