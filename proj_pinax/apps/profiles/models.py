@@ -17,6 +17,9 @@ class Profile(ProfileBase):
                                                       "(year is the last year the layout was saved, years is first--last)."),
                                           default=u'This file is in the public domain.') # \ua9 for copyright
 
+    def layouts(self):
+        return self.user.layout_set.all()
+    
     def copyright(self, start_year, end_year=None):
         names = ("name", "location", "website", "affiliation")
         args = dict((name, getattr(self, name)) for name in names)

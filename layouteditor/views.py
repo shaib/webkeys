@@ -545,7 +545,7 @@ def clone_layout(request, owner, name):
     user = request.user
     if not user.is_authenticated():
         messages.add_message(request, messages.ERROR, "You need to be logged in to create a layout")
-        return redirect(reverse('layouts'))# FIXME: No such url anymore
+        return redirect(reverse('show-layout', kwargs={"name": name, "owner": owner}))
     if request.method!='POST':
         return HttpResponseBadRequest()
     form = CloneForm(user, request.POST)
