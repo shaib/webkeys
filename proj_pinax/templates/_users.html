@@ -1,3 +1,5 @@
+{% load i18n %}
 {% for user in users %}
 <p><a href="{{ user.get_profile.get_absolute_url }}">{{ user.username }}</a></p>
 {% endfor %}
+<h5><a href="{% url profile_list %}">{% trans "All Profiles" %}</a></h5>
