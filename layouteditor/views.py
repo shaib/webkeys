@@ -3,7 +3,6 @@ from unicodedata import category, name as char_name
 
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.db import transaction
-from idios import django
 from django.core.exceptions import SuspiciousOperation
 from django.http import Http404, HttpResponseBadRequest, HttpResponse,\
     HttpResponseForbidden
@@ -11,23 +10,21 @@ from django.template import loader
 from django.template.context import RequestContext
 from django.core.urlresolvers import reverse
 from django.conf import settings
-#from django.utils.html import escape as html_escape
-
 from django.contrib import messages
+from django.utils import simplejson
+from django.contrib.auth.decorators import login_required
+
 from models import KeyBinding, Layout, Level, KeyChange
-from forms import KeyForm, CloneForm
+from forms import KeyForm, CloneForm, LayoutDescriptionForm
 import keymaps as km
 import caps_options_utils as caps
 import caps_options # just to load the options;  @UnusedImport
-from django.utils import simplejson
-from django.contrib.auth.decorators import login_required
-from south.exceptions import InconsistentMigrationHistory
-from layouteditor.forms import LayoutDescriptionForm
 
 
 __all__ = ["show_layout", "clone_layout", "change_description",
            "edit_key", "undo_edit", "redo_edit",
-           "gen_xkb", "gen_klc", "gen_map"
+           "gen_xkb", "gen_klc", "gen_map",
+           "gen_xkb_patch",
 ]
                                
 class InconsistentUndo(SuspiciousOperation):
@@ -315,7 +312,19 @@ def gen_xkb(request, owner, name):
                                   }, 
                                   context_instance=RequestContext(request),
                                   mimetype="text/plain")
-    response['Content-Disposition'] = 'attachment; filename=%s' % name
+    response['Content-Disposition'] = 'attachment; filename=il_%s' % name
+    return response
+
+def gen_xkb_patch(request, owner, name):
+    layout = get_object_or_404(Layout, owner__username=owner, name=name)
+    desc_line = layout.description.splitlines()[0]
+    response = render_to_response("xkb.patch", {
+                                    'name': layout.name,
+                                    'desc_line': desc_line,
+                                  },
+                                  context_instance=RequestContext(request),
+                                  mimetype="text/plain")
+    response['Content-Disposition'] = 'attachment; filename=xkb_%s.patch' % name
     return response
 
 def gen_klc(request, owner, name):

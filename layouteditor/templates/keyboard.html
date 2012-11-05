@@ -149,11 +149,20 @@
       </div>
     </td>
     <td>
-        See <a href="{% url use_xkb %}">Using xkb configuration files</a>
+        See <a href="{% url use_xkb %}#caps-key-types">Using xkb configuration files: A word on  caps lock and key types</a>
     </td>
 	</tr><tr><th></th><td colspan="2">
       <button data-dojo-type="dijit.form.Button" type="submit">Generate layout file</button>
-   	</td></tr>
+    </td><td rowspan="2">
+      <span class="xkb-only">
+        See <a href="{% url use_xkb %}#caps-key-types">Using xkb configuration files</a><br />
+    	Get <a href="{% url gen-xkb-patch owner name %}">xkb patch file</a> for this layout
+      </span>
+      <span class="klc-only">
+        See <a href="{% url use_klc %}">Using KLC files for Windows</a>
+      </span>
+    </td>
+   	</tr>
    	</table>
   </div>
  </form>
@@ -288,12 +297,27 @@
     	                                 dojo.query('input:[type="radio"][name="caps_option"]:checked').some(
     	                                 	function(node) { return dojo.getNodeProp(node, "data-free-caps");}
     	                                 )
+    	                                 
+           //var xkb_shown = dijit.byId('type_xkb').checked, klc_shown = dijit.byId('type_klc').checked
+           var xkb_show =  dojo.query('#type_xkb:checked').length, klc_show = dojo.query('#type_klc:checked').length
+           
+           if (xkb_show) { 
+           	    to_show = to_show.concat(dojo.query(".xkb-only")) 
+           } else {
+           	    to_hide = to_hide.concat(dojo.query(".xkb-only"))
+           }
+           if (klc_show) { 
+                to_show = to_show.concat(dojo.query(".klc-only")) 
+           } else {
+                to_hide = to_hide.concat(dojo.query(".klc-only"))
+           }
     	   if (xkb_caps_key_type_shown != xkb_caps_key_type_show) {
     	   	   if (xkb_caps_key_type_show)
     	   	     to_show.push(dojo.byId('xkb_caps_key_type'))
     	       else
                  to_hide.push(dojo.byId('xkb_caps_key_type'))
     	   }
+    	   
     	   if (to_hide.length && to_show.length) {
                fx.wipeOut({
 	                node: to_hide[0],
