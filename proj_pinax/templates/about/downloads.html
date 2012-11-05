@@ -1,0 +1,34 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "What Next?" %}{% endblock %}
+{% block extra_head %}
+  <style>
+  	.prompt { color: blue; }
+  	.code-block { margin-left: 3em;}
+  </style>
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Downloads" %}</h1>
+    
+        <p>
+        	The most interesting downloads on this site are, of course, the layout files.
+        	But there are also some less interesting downloads.
+        </p>
+        
+        <dl class="what_next">
+            <dt><a href="{{STATIC_URL}}downloads/types.patch">The six-level patch</a></dt>
+            <dd>This file can be useful for some caps-lock options under xkb. It is not useful for Windows users.</dd>
+            <dt><a href="{{STATIC_URL}}downloads/TaameyAshkenaz.zip">The Taamey Ashkenaz font</a></dt>
+            <dd>
+            	This is the font used for presenting keyboard layouts on this site, selected beause it includes
+            	Taamey Hamikra (biblical cantillations). It is a free font, produced originally for the Culmus
+            	project, where you can find <a href="http://culmus.sourceforge.net/taamim/index.html">more details</a>.
+            </dd>
+            
+        </dl>
+            
+{% endblock %}

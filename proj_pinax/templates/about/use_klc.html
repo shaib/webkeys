@@ -1,0 +1,34 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "What Next?" %}{% endblock %}
+{% block extra_head %}
+  <style>
+  	.prompt { color: blue; }
+  	.code-block { margin-left: 3em;}
+  </style>
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Using KLC files on Windows" %}</h1>
+    
+        <p>To use the KLC files produced by this site, you need the microsoft MSKLC utility.</p>
+        
+        <dl class="what_next">
+            <h3>Download and install MSKLC</h3>
+            <p>
+                MSKLC &ndash; The Microsoft Keyboard Layout Creator &ndash; is freely available
+                from Microsoft. It is described <a href="http://msdn.microsoft.com/en-us/goglobal/bb964665.aspx">here</a>,
+                and can be downloaded from <a href="http://www.microsoft.com/en-us/download/details.aspx?id=22339">here</a>.                 
+            </p>
+            <p>
+            	After you download and install it, it will be the default application to handle .klc files, so files you
+            	generate on this site will be automatically opened in MSKLC. To install the layout, you need to export
+            	an installer from within MSKLC, and then install it. You can, of course, also distribute this installer
+            	to other users, for them to use your layout.
+            </p>
+        </dl>
+            
+{% endblock %}

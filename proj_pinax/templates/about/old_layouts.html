@@ -1,0 +1,34 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "What Next?" %}{% endblock %}
+{% block extra_head %}
+  <style>
+  	.prompt { color: blue; }
+  	.code-block { margin-left: 3em;}
+  </style>
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Where did the old layouts go?" %}</h1>
+    
+        <p>This site had an initial version where some users created layouts; what happened to these layouts?</p>
+        
+        <dl class="what_next">
+            <p>
+                The initial version of this site had no concept of ownership, and all layouts belonged to all users;
+                so anyone could edit any layout. This is no longer the case -- with this version and going forward,
+                users can only edit their own layouts.                  
+            </p>
+            <p>
+            	To preserve the old work, all old layouts have been attached to a "fake" user named "old_times". If 
+            	you had a layout in the old site, you can still find it in old_times' 
+            	<a href="{% url profile_detail "old_times" %}">profile</a>. If you
+            	want to modify it, just clone it and continue working on your own copy. You will need to 
+            	<a href="{% url acct_signup %}">register</a> for this, of course. 
+            </p>
+        </dl>
+            
+{% endblock %}

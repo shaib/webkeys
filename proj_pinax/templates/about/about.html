@@ -1,0 +1,34 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "What Next?" %}{% endblock %}
+{% block extra_head %}
+  <style>
+  	.prompt { color: blue; }
+  	.code-block { margin-left: 3em;}
+  </style>
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "About this site" %}</h1>
+    
+        <dl class="what_next">
+	        <p>
+	            This site was built by <a href="mailto:webkeys@platonix.com">Shai Berger</a> and is hosted by Shai's employer, 
+	            <a href="http://platonix.com">Platonix</a>. Platonix is just being nice to Shai about this.
+	        </p>
+        
+            <p>
+                The code is mostly in Python, with the inevitable sprinkle of JavaScript and HTML. It is based on 
+                <a href="http://djangoproject.com">Django</a>, and has two distinct parts: A layout editor application,
+                and a <a href="http://pinaxproject.com">Pinax</a> based website to carry it. There are other dependencies,
+                of course, but that is the general picture.
+            </p>
+            <p>
+            	You can find the code for this site on <a href="https://github.com/shaib/webkeys">Github</a>. 
+            </p>
+        </dl>
+            
+{% endblock %}

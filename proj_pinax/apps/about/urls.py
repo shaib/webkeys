@@ -15,4 +15,6 @@ urlpatterns = patterns("",
     url_about_template("use_xkb"),
     url_about_template("use_klc"),
     url_about_template("downloads"),
+    url_about_template("old_layouts"),
+    url_about_template("about"),
 )
