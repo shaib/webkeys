@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^genklc/(?P<owner>\w+)/(?P<name>\w+)/$', gen_klc, name="gen-klc"),
     url(r'^genmap/(?P<owner>\w+)/(?P<name>\w+)/$', gen_map, name="gen-map"),
 
+    url(r'^search/$', search, name="layout-search")
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

@@ -1,3 +1,6 @@
 {% for layout in layouts %}
 <p><a href="{{ layout.get_absolute_url }}">{{ layout.owner.username }}/{{ layout.name }}</a></p>
 {% endfor %}
+<form action="{% url layout-search %}" method="get">
+	<h5>Search layouts: <input type="search" name="search" id="search-input"></h5>
+</form>

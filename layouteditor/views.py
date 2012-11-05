@@ -13,6 +13,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from models import KeyBinding, Layout, Level, KeyChange
 from forms import KeyForm, CloneForm, LayoutDescriptionForm
@@ -25,6 +26,7 @@ __all__ = ["show_layout", "clone_layout", "change_description",
            "edit_key", "undo_edit", "redo_edit",
            "gen_xkb", "gen_klc", "gen_map",
            "gen_xkb_patch",
+           "search",
 ]
                                
 class InconsistentUndo(SuspiciousOperation):
@@ -580,3 +582,11 @@ def get_default_clone_name(user, name):
         if default not in existing_names:
             return default
         suffix += 1
+
+def search(request):
+    if request.method=='GET':
+        search = request.GET.get("search",None)
+        if not search:
+            return redirect(reverse("home"))
+        layouts = Layout.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
+        return render_to_response("layout_search.html", locals(), context_instance=RequestContext(request) ) 

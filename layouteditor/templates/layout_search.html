@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Keyboard Layout Editor - {{ name }}{% endblock %}
+
+{% block extra_head %}
+{% include "style.css" %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}kb-style.css" />
+{% endblock %}
+
+{% block body %}
+<form action="{% url layout-search %}" method="get">
+    <h5>Search layouts:
+    <input type="search" name="search" id="search-input" value="{{ search }}">
+    </h5>
+</form>
+
+{% for layout in layouts %}
+<p><a href="{{ layout.get_absolute_url }}">{{ layout.owner.username }}/{{ layout.name }}</a></p>
+{% endfor %}
+{% endblock %}
