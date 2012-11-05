@@ -133,7 +133,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     
     "pinax.apps.account.context_processors.account",
     
-    "notification.context_processors.notification",
+    #"notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
 ]
 
@@ -153,7 +153,7 @@ INSTALLED_APPS = [
     "pinax_theme_bootstrap",
     
     # external
-    "notification", # must be first
+    #"notification", # must be first
     "staticfiles",
     "compressor",
     "debug_toolbar",
@@ -192,7 +192,7 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
-NOTIFICATION_LANGUAGE_MODULE = "account.Account"
+# NOTIFICATION_LANGUAGE_MODULE = "account.Account"
 
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_USE_OPENID = False
