@@ -1,0 +1,64 @@
+--- rules/base.lst.orig	2012-11-05 14:23:35.307744212 +0200
++++ rules/base.lst	2012-11-05 14:23:35.311743972 +0200
+@@ -477,12 +477,13 @@
+   mac             is: Icelandic (Macintosh)
+   dvorak          is: Icelandic (Dvorak)
+   lyx             il: Hebrew (lyx)
++  si1452          il: Draft of new version of SI1452
+   phonetic        il: Hebrew (phonetic)
+   biblical        il: Hebrew (Biblical, Tiro)
+   nodeadkeys      it: Italian (eliminate dead keys)
+--- rules/base.xml.orig	2012-11-05 14:23:35.311743972 +0200
++++ rules/base.xml	2012-11-05 14:23:35.311743972 +0200
+@@ -3374,12 +3374,18 @@
+             <name>lyx</name>
+             <description>Hebrew (lyx)</description>
+           </configItem>
+         </variant>
++        <variant>
++          <configItem>
++            <name>si1452</name>
++            <description>Draft of new version of SI1452</description>
++          </configItem>
++        </variant>
+         <variant>
+           <configItem>
+             <name>phonetic</name>
+             <description>Hebrew (phonetic)</description>
+--- rules/evdev.lst.orig	2012-11-05 14:23:35.311743972 +0200
++++ rules/evdev.lst	2012-11-05 14:23:35.307744212 +0200
+@@ -477,12 +477,13 @@
+   mac             is: Icelandic (Macintosh)
+   dvorak          is: Icelandic (Dvorak)
+   lyx             il: Hebrew (lyx)
++  si1452          il: Draft of new version of SI1452
+   phonetic        il: Hebrew (phonetic)
+   biblical        il: Hebrew (Biblical, Tiro)
+   nodeadkeys      it: Italian (eliminate dead keys)
+--- rules/evdev.xml.orig	2012-11-05 14:23:35.311743972 +0200
++++ rules/evdev.xml	2012-11-05 14:23:35.307744212 +0200
+@@ -3374,12 +3374,18 @@
+             <name>lyx</name>
+             <description>Hebrew (lyx)</description>
+           </configItem>
+         </variant>
++        <variant>
++          <configItem>
++            <name>si1452</name>
++            <description>Draft of new version of SI1452</description>
++          </configItem>
++        </variant>
+         <variant>
+           <configItem>
+             <name>phonetic</name>
+             <description>Hebrew (phonetic)</description>
+--- symbols/il.orig	2012-01-20 19:23:42.000000000 +0200
++++ symbols/il	2012-08-10 08:38:50.000000000 +0300
+@@ -249,3 +249,7 @@
+ 
+ 	key <SPCE> { [ space, space, thinspace, nobreakspace ] };
+ };
++
++partial alphanumeric_keys xkb_symbols "si1452" {
++	include "il_si1452"
++};
