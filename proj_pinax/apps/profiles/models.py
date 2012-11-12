@@ -1,8 +1,8 @@
 from django.db import models
+from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from idios.models import ProfileBase
-
 
 class Profile(ProfileBase):
     name = models.CharField(_("name"), max_length=50, null=True, blank=True)
@@ -31,3 +31,17 @@ class Profile(ProfileBase):
         else:
             args['years'] = u'%s--%s' %(start_year, end_year)
         return self.copyright_template % args
+
+    @classmethod
+    def get_form(cls):
+        # This is the cleanest, easiest way to change a form field
+        print "get_form called"
+        return ProfileForm
+
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        widgets = {
+            'about': forms.Textarea(attrs={'rows':5})
+        }
