@@ -45,3 +45,4 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             'about': forms.Textarea(attrs={'rows':5})
         }
+        exclude = ["user"]
