@@ -10,7 +10,7 @@ class Layout(models.Model):
     name = models.CharField(max_length=64)
     ref1 = models.ForeignKey("Level", null=True, related_name='ref1_using_layouts')
     ref2 = models.ForeignKey("Level", null=True, related_name='ref2_using_layouts')
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(blank=True)
     created = models.DateField(auto_now_add=True)
     
     class Meta:
