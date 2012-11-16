@@ -321,7 +321,7 @@ def gen_xkb(request, owner, name):
 
 def gen_xkb_patch(request, owner, name):
     layout = get_object_or_404(Layout, owner__username=owner, name=name)
-    desc_line = layout.description.splitlines()[0]
+    desc_line = layout.description.splitlines()[0] if layout.description else ""
     response = render_to_response("xkb.patch", {
                                     'name': layout.name,
                                     'desc_line': desc_line,
