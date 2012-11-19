@@ -122,7 +122,7 @@ class KeyChange(models.Model):
     #       This is far more efficient, a little less general, and probably
     #       the right way to go forward in this app.
 
-    NULL = chr(0)
+    NULL = chr(1) # less optimal than chr(0), but supported on old python/sqlite (python 2.6)
     EMPTY = 4*NULL
 
     layout = models.ForeignKey(Layout)
