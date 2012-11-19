@@ -487,12 +487,12 @@ def undo_redo_edit(request, owner, name, redo):
     change = KeyChange.objects.to_undo(layout) if not redo else KeyChange.objects.to_redo(layout) 
     bindings = set()
     if change:
-        for lvl,before,after in zip([1,2,3,4], change.before, change.after):
-            level = Level.objects.get(layout=layout, level=lvl) # TODO: factor this out to 1 query, not 4
+        cbefore, cafter = (change.before, change.after) if not redo else (change.after, change.before) 
+        for level in layout.level_set.all():
+            idx = level.level-1
+            before,after = cbefore[idx], cafter[idx]
             params = dict(level=level, row=change.row, pos=change.pos)
             if before!=after:
-                if redo:
-                    before,after = after,before
                 
                 if before==KeyChange.NULL:
                     if KeyBinding.objects.filter(**params).count()!=1:
