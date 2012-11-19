@@ -51,10 +51,11 @@ class CloneForm(forms.Form):
 
 class LayoutDescriptionForm(forms.Form):
     
-    description = forms.CharField(widget=forms.Textarea(attrs=dict(
-                cols=70, rows=4,
-                placeholder="Write a description for your layout here",
-                width="100%")))
+    description = forms.CharField(required=False,
+                                  widget=forms.Textarea(attrs=dict(
+                                        cols=70, rows=4,
+                                        placeholder="Write a description for your layout here",
+                                        width="100%")))
     
     def __init__(self, layout=None, data=None, *args, **kw):
         if data is None: 
