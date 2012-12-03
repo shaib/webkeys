@@ -1,0 +1,3 @@
+"Row","Position","US-Latin","Level","Unicode","Basic","Name","Pretty","Mirrored"
+{% for row in key_rows %}{% for key in row %}{% for char in key.levels|slice:"1:" %}{% with forloop.parentloop as keyloop %}
+{% if keyloop.first and forloop.first %}{{ keyloop.parentloop.counter }}{% endif %},{% if forloop.first %}{{ forloop.parentloop.counter }}{% endif %},{% if forloop.first %}"{{ key.ref1|safe }}"{% endif %},{{ forloop.counter }},"{{ char.hexa }}","{{ char.char|safe }}","{{ char.name }}","{{ char.pretty }}","{{ char.mirrored}}",{% endwith %}{% endfor %}{% endfor %}{% endfor %}

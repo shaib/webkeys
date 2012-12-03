@@ -27,6 +27,7 @@ __all__ = ["show_layout", "clone_layout", "change_description",
            "gen_xkb", "gen_klc", "gen_map",
            "gen_xkb_patch",
            "search",
+           "gen_csv",
 ]
                                
 class InconsistentUndo(SuspiciousOperation):
@@ -222,7 +223,8 @@ def presentation(char,
  
 
 
-def make_view_keys(owner, name):
+def make_view_keys(owner, name,
+                   presentation = presentation):
     qs = KeyBinding.objects.filter(level__layout__owner__username=owner,
                                    level__layout__name=name)
     qs = qs.select_related("level")
@@ -592,3 +594,69 @@ def search(request):
             return redirect(reverse("home"))
         layouts = Layout.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
         return render_to_response("layout_search.html", locals(), context_instance=RequestContext(request) ) 
+
+def csv_protect(char):
+    escapes = {
+        u'"' : ur'""',
+        LRM  : u'LRM',
+        RLM  : u'RLM',
+               }
+    return escapes.get(char,char)
+
+def csv_entry(char):
+    
+    CIRCLE = u'\u25CB'
+    ALEPH  = u'\u05d0'
+    VAV    = u'\u05d5'
+    BET    = u'\u05d1'
+    SHIN   = u'\u05e9'
+    
+    u = unicode(char) # just make sure
+    pretty_value = u""
+    if u in VISIBLE_FORMATTING:
+        hexa = VISIBLE_FORMATTING[u][3:7]
+        value = pretty_value = unichr(int(hexa,16))
+    elif u in SHIN_DOTS:
+        pretty_value = SHIN+u
+        value = CIRCLE+u
+    elif u in HATAFIM:
+        pretty_value = ALEPH+u
+        value = CIRCLE+u
+    elif u==HOLAM_HASER_FOR_VAV:
+        pretty_value = VAV+u
+        value = CIRCLE+u
+    elif category(u)==NONSPACING_MARK:
+        pretty_value = BET+u
+        value = CIRCLE+u
+    else:
+        value = u
+        
+    value = StyleStr(value)
+    value.hexa = "%04X" % ord(u)
+    value.name = char_name(u)
+    value.char = csv_protect(u)
+    value.pretty = pretty_value
+    return value
+
+def gen_csv(request, owner, name):
+    layout, kb = make_view_keys(owner, name, presentation=csv_entry)
+    mirrored = request.GET.get('mirrored', True)
+    kb = [[k for k in row if isinstance(k, Key)] for row in kb]
+    for row in kb:        
+        for key in row:
+            for k in key.levels:
+                m = k and km.mirror(k.char, mirrored)
+                if m and m!=k.char:
+                     k.char = m
+                     k.mirrored = "Mirrored"
+    
+    response = render_to_response("keys_csv", {
+                                    'key_rows':kb, 
+                                    'name':name,
+                                    'mirrored': mirrored,
+                                    'description' : layout.description,
+                                  }, 
+                                  context_instance=RequestContext(request),
+                                  mimetype="text/plain")
+    response['Content-Disposition'] = 'attachment; filename=il_%s.csv' % name
+    return response
