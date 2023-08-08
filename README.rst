@@ -2,6 +2,15 @@
  Webkeys: A keyboard layout editor
 ===================================
 
+This project is on ice
+======================
+This project hasn't been touched in 11 years, and likely won't be
+updated very soon. The front-end framework (Dojo) probably needs
+replacing (last updated Feb 2022), Django has changed so much since
+in 11 years that it isn't funny, so what's needed to bring this to
+life is effectively a full rewrite.
+
+
 Layout Editor
 =============
 
